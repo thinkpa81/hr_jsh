@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>진행중인 채용 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 64px 0; margin-bottom: 48px;">
+    <div class="container">
+      <h1 style="font-size: 40px; margin-bottom: 16px; color: white;">
+        <i class="fas fa-clock"></i> 진행중인 채용
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9);">
+        현재 모집 중인 채용공고를 확인하세요
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 80px;">
+    <!-- 필터 섹션 -->
+    <div class="card" style="margin-bottom: 32px; padding: 24px;">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <div style="flex: 1; min-width: 250px;">
+          <input type="text" id="search-input" placeholder="포지션 또는 직무로 검색" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+        </div>
+        <select id="department-filter" style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <option value="">전체 부서</option>
+          <option value="경영지원">경영지원</option>
+          <option value="IT개발">IT개발</option>
+          <option value="데이터분석">데이터분석</option>
+          <option value="인사">인사</option>
+        </select>
+        <select id="type-filter" style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <option value="">전체 유형</option>
+          <option value="정규직">정규직</option>
+          <option value="계약직">계약직</option>
+          <option value="인턴">인턴</option>
+        </select>
+        <button class="btn btn-primary" onclick="applyFilters()">
+          <i class="fas fa-search"></i> 검색
+        </button>
+      </div>
+    </div>
+
+    <!-- 진행 현황 카드 -->
+    <div class="grid grid-3" style="margin-bottom: 48px;">
+      <div class="card text-center" style="padding: 32px; background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white;">
+        <h3 style="font-size: 40px; font-weight: 700; margin-bottom: 8px; color: white;">8</h3>
+        <p style="margin: 0; font-size: 16px; color: rgba(255,255,255,0.9);">총 채용공고</p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 32px; background: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%); color: white;">
+        <h3 style="font-size: 40px; font-weight: 700; margin-bottom: 8px; color: white;">124</h3>
+        <p style="margin: 0; font-size: 16px; color: rgba(255,255,255,0.9);">총 지원자</p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 32px; background: linear-gradient(135deg, #28a745 0%, #218838 100%); color: white;">
+        <h3 style="font-size: 40px; font-weight: 700; margin-bottom: 8px; color: white;">15</h3>
+        <p style="margin: 0; font-size: 16px; color: rgba(255,255,255,0.9);">서류 합격</p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+    </div>
+
+    <!-- 채용공고 목록 -->
+    <h2 style="margin-bottom: 24px;">모집 중인 포지션 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span></h2>
+    <div class="grid grid-2" id="jobs-container">
+      <!-- 예시 채용공고 1 -->
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-primary">IT개발</span>
+            <span class="badge badge-warning">D-5</span>
+          </div>
+          <h3 class="card-title">백엔드 개발자 (Node.js)</h3>
+          <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-map-marker-alt" style="width: 20px;"></i> 서울 강남구
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-briefcase" style="width: 20px;"></i> 정규직 · 경력 3년↑
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-users" style="width: 20px;"></i> 지원자 28명
+            </div>
+            <div>
+              <i class="fas fa-calendar" style="width: 20px;"></i> ~ 2026.01.20
+            </div>
+          </div>
+          <div style="padding: 12px; background: var(--surface-color); border-radius: 8px; margin-bottom: 16px;">
+            <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">진행률</div>
+            <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
+              <div style="width: 65%; height: 100%; background: var(--success-color);"></div>
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px; text-align: right;">65% 진행중</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm">
+            <i class="fas fa-chart-bar"></i> 통계 보기
+          </button>
+          <a href="job-detail.html" class="btn btn-primary btn-sm">
+            상세보기
+          </a>
+        </div>
+      </div>
+
+      <!-- 예시 채용공고 2 -->
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-primary">데이터분석</span>
+            <span class="badge badge-warning">D-12</span>
+          </div>
+          <h3 class="card-title">데이터 사이언티스트</h3>
+          <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-map-marker-alt" style="width: 20px;"></i> 서울 판교
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-briefcase" style="width: 20px;"></i> 정규직 · 경력 2~5년
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-users" style="width: 20px;"></i> 지원자 42명
+            </div>
+            <div>
+              <i class="fas fa-calendar" style="width: 20px;"></i> ~ 2026.01.27
+            </div>
+          </div>
+          <div style="padding: 12px; background: var(--surface-color); border-radius: 8px; margin-bottom: 16px;">
+            <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">진행률</div>
+            <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
+              <div style="width: 45%; height: 100%; background: var(--info-color);"></div>
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px; text-align: right;">45% 진행중</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm">
+            <i class="fas fa-chart-bar"></i> 통계 보기
+          </button>
+          <a href="job-detail.html" class="btn btn-primary btn-sm">
+            상세보기
+          </a>
+        </div>
+      </div>
+
+      <!-- 예시 채용공고 3 -->
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-primary">인사</span>
+            <span class="badge badge-success">D-18</span>
+          </div>
+          <h3 class="card-title">HR 매니저</h3>
+          <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-map-marker-alt" style="width: 20px;"></i> 서울 여의도
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-briefcase" style="width: 20px;"></i> 정규직 · 경력 5년↑
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-users" style="width: 20px;"></i> 지원자 19명
+            </div>
+            <div>
+              <i class="fas fa-calendar" style="width: 20px;"></i> ~ 2026.02.03
+            </div>
+          </div>
+          <div style="padding: 12px; background: var(--surface-color); border-radius: 8px; margin-bottom: 16px;">
+            <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">진행률</div>
+            <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
+              <div style="width: 30%; height: 100%; background: var(--primary-color);"></div>
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px; text-align: right;">30% 진행중</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm">
+            <i class="fas fa-chart-bar"></i> 통계 보기
+          </button>
+          <a href="job-detail.html" class="btn btn-primary btn-sm">
+            상세보기
+          </a>
+        </div>
+      </div>
+
+      <!-- 예시 채용공고 4 -->
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-primary">경영지원</span>
+            <span class="badge badge-success">D-25</span>
+          </div>
+          <h3 class="card-title">경영기획 담당자</h3>
+          <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-map-marker-alt" style="width: 20px;"></i> 경기 수원
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-briefcase" style="width: 20px;"></i> 정규직 · 신입~3년
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-users" style="width: 20px;"></i> 지원자 35명
+            </div>
+            <div>
+              <i class="fas fa-calendar" style="width: 20px;"></i> ~ 2026.02.10
+            </div>
+          </div>
+          <div style="padding: 12px; background: var(--surface-color); border-radius: 8px; margin-bottom: 16px;">
+            <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">진행률</div>
+            <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
+              <div style="width: 20%; height: 100%; background: var(--accent-color);"></div>
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px; text-align: right;">20% 진행중</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm">
+            <i class="fas fa-chart-bar"></i> 통계 보기
+          </button>
+          <a href="job-detail.html" class="btn btn-primary btn-sm">
+            상세보기
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center" style="margin-top: 48px;">
+      <a href="jobs.html" class="btn btn-outline btn-lg">
+        <i class="fas fa-list"></i> 전체 채용공고 보기
+      </a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function applyFilters() {
+      const searchTerm = document.getElementById('search-input').value;
+      const department = document.getElementById('department-filter').value;
+      const type = document.getElementById('type-filter').value;
+      
+      // 필터링 로직 (예시)
+      console.log('Filtering:', { searchTerm, department, type });
+      alert('필터가 적용되었습니다. (예시 기능)');
+    }
+  </script>
+</body>
+</html>

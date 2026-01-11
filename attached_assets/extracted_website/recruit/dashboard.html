@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채용 현황 대시보드 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <style>
+    .dashboard-header {
+      background: #2563EB;
+      color: white;
+      padding: 24px 0;
+      margin-bottom: 32px;
+    }
+    
+    .dashboard-title {
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+      max-width: 1200px;
+    }
+    
+    .stat-card {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      border-left: 3px solid;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 100px;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    
+    .stat-card.blue { border-left-color: #3B82F6; }
+    .stat-card.green { border-left-color: #10B981; }
+    .stat-card.purple { border-left-color: #8B5CF6; }
+    .stat-card.orange { border-left-color: #F59E0B; }
+    
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .stat-value {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    
+    .stat-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      align-self: flex-end;
+    }
+    
+    .stat-card.blue .stat-icon { background: #DBEAFE; color: #3B82F6; }
+    .stat-card.green .stat-icon { background: #D1FAE5; color: #10B981; }
+    .stat-card.purple .stat-icon { background: #EDE9FE; color: #8B5CF6; }
+    .stat-card.orange .stat-icon { background: #FEF3C7; color: #F59E0B; }
+    
+    .dashboard-section {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-primary);
+    }
+    
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    
+    .ai-score-box {
+      text-align: center;
+      padding: 24px;
+    }
+    
+    .ai-score {
+      font-size: 52px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    
+    .ai-score-label {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+    
+    .stage-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .stage-item:hover {
+      transform: translateX(4px);
+    }
+    
+    .stage-item.stage-1 { background: #D1FAE5; }
+    .stage-item.stage-2 { background: #FCE7F3; }
+    .stage-item.stage-3 { background: #DBEAFE; }
+    .stage-item.stage-4 { background: #FEF3C7; }
+    
+    .stage-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .stage-count {
+      font-size: 18px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: white;
+    }
+    
+    .stage-item.stage-1 .stage-count { color: #10B981; }
+    .stage-item.stage-2 .stage-count { color: #EC4899; }
+    .stage-item.stage-3 .stage-count { color: #3B82F6; }
+    .stage-item.stage-4 .stage-count { color: #F59E0B; }
+    
+    .applicants-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    
+    .applicants-table thead {
+      background: var(--surface-color);
+    }
+    
+    .applicants-table th {
+      padding: 16px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border-color);
+    }
+    
+    .applicants-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 14px;
+    }
+    
+    .applicants-table tr:hover {
+      background: var(--surface-color);
+    }
+    
+    .applicant-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .applicant-email {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+    
+    .score-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .score-high {
+      background: #D1FAE5;
+      color: #10B981;
+    }
+    
+    .score-medium {
+      background: #DBEAFE;
+      color: #3B82F6;
+    }
+    
+    .score-low {
+      background: #FEF3C7;
+      color: #F59E0B;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 13px;
+    }
+    
+    .status-1 { background: #D1FAE5; color: #10B981; }
+    .status-2 { background: #FCE7F3; color: #EC4899; }
+    .status-3 { background: #DBEAFE; color: #3B82F6; }
+    .status-4 { background: #FEF3C7; color: #F59E0B; }
+    
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .applicants-table {
+        font-size: 12px;
+      }
+      
+      .applicants-table th,
+      .applicants-table td {
+        padding: 12px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="../index.html" class="logo">
+        <i class="fas fa-brain"></i>
+        <span style="margin-left: 8px;">JSH HR</span>
+      </a>
+      
+      <nav class="nav">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="../recruit/index.html" class="nav-link">
+              채용 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner dropdown-grid-5">
+                <a href="../recruit/jobs.html" class="dropdown-item">
+                  <i class="fas fa-briefcase"></i> 채용공고
+                </a>
+                <a href="../recruit/ongoing.html" class="dropdown-item">
+                  <i class="fas fa-clock"></i> 진행중인 채용
+                </a>
+                <a href="../recruit/positions.html" class="dropdown-item">
+                  <i class="fas fa-user-tie"></i> 직무소개
+                </a>
+                <a href="../recruit/process.html" class="dropdown-item">
+                  <i class="fas fa-sitemap"></i> 채용 프로세스
+                </a>
+                <a href="../recruit/faq.html" class="dropdown-item">
+                  <i class="fas fa-question-circle"></i> 채용 FAQ
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              HR 시스템 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner">
+                <a href="../analytics/dashboard.html" class="dropdown-item">
+                  <i class="fas fa-chart-bar"></i> 데이터 분석
+                </a>
+                <a href="../analytics/dashboard.html#hr-dashboard" class="dropdown-item">
+                  <i class="fas fa-tachometer-alt"></i> HR 대시보드
+                </a>
+                <a href="../analytics/dashboard.html#ai-stats" class="dropdown-item">
+                  <i class="fas fa-robot"></i> AI HR 통계
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              인사제도 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner">
+                <a href="../guide/hr-comprehensive.html" class="dropdown-item">
+                  <i class="fas fa-book"></i> HR 종합 가이드
+                </a>
+                <a href="../hr/evaluation.html" class="dropdown-item">
+                  <i class="fas fa-star"></i> 평가제도
+                </a>
+                <a href="../hr/compensation.html" class="dropdown-item">
+                  <i class="fas fa-money-bill-wave"></i> 보상체계
+                </a>
+                <a href="../hr/promotion.html" class="dropdown-item">
+                  <i class="fas fa-chart-line"></i> 승진제도
+                </a>
+                <a href="../hr/benefits.html" class="dropdown-item">
+                  <i class="fas fa-gift"></i> 복리후생
+                </a>
+                <a href="../hr/culture.html" class="dropdown-item">
+                  <i class="fas fa-users"></i> 조직문화
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              교육/개발 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner">
+                <a href="../education/courses.html" class="dropdown-item">
+                  <i class="fas fa-graduation-cap"></i> 교육과정 안내
+                </a>
+                <a href="../education/enroll.html" class="dropdown-item">
+                  <i class="fas fa-edit"></i> 수강신청
+                </a>
+                <a href="../mypage/learning.html" class="dropdown-item">
+                  <i class="fas fa-history"></i> 나의 학습이력
+                </a>
+                <a href="../education/materials.html" class="dropdown-item">
+                  <i class="fas fa-folder-open"></i> 교육자료실
+                </a>
+                <a href="../education/certificate.html" class="dropdown-item">
+                  <i class="fas fa-certificate"></i> 수료증 발급
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="../notice/list.html" class="nav-link">
+              공지사항
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              고객지원 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner">
+                <a href="../support/faq.html" class="dropdown-item">
+                  <i class="fas fa-question-circle"></i> FAQ
+                </a>
+                <a href="../support/inquiry.html" class="dropdown-item">
+                  <i class="fas fa-comments"></i> 1:1 문의
+                </a>
+                <a href="../support/archive.html" class="dropdown-item">
+                  <i class="fas fa-archive"></i> 자료실
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <a href="../login.html" class="btn btn-primary btn-sm">로그인</a>
+      </div>
+      
+      <button class="mobile-menu-toggle" aria-label="메뉴 열기">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <div class="container">
+      <h1 class="dashboard-title">
+        <i class="fas fa-globe"></i>
+        채용 현황 대시보드
+      </h1>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container" style="margin-bottom: 80px;">
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card blue">
+        <div class="stat-label">
+          진행중인 채용공고
+        </div>
+        <div class="stat-value">5</div>
+        <div class="stat-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+      </div>
+      
+      <div class="stat-card green">
+        <div class="stat-label">
+          총 지원자
+        </div>
+        <div class="stat-value">8</div>
+        <div class="stat-icon">
+          <i class="fas fa-users"></i>
+        </div>
+      </div>
+      
+      <div class="stat-card purple">
+        <div class="stat-label">
+          전체 지원 건수
+        </div>
+        <div class="stat-value">8</div>
+        <div class="stat-icon">
+          <i class="fas fa-paper-plane"></i>
+        </div>
+      </div>
+      
+      <div class="stat-card orange">
+        <div class="stat-label">
+          오늘 면접 일정
+        </div>
+        <div class="stat-value">0</div>
+        <div class="stat-icon">
+          <i class="fas fa-inbox"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two Column Layout -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+      <!-- AI Score Section -->
+      <div class="dashboard-section">
+        <h2 class="section-title">
+          <div class="section-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          AI 매칭 평균 점수
+        </h2>
+        <div class="ai-score-box">
+          <div class="ai-score">88</div>
+          <div class="ai-score-label">/ 100점</div>
+        </div>
+      </div>
+
+      <!-- Stage Status Section -->
+      <div class="dashboard-section">
+        <h2 class="section-title">
+          <div class="section-icon">
+            <i class="fas fa-layer-group"></i>
+          </div>
+          단계별 지원자 현황
+        </h2>
+        
+        <div class="stage-item stage-1">
+          <span class="stage-name">1차면접</span>
+          <span class="stage-count">2명</span>
+        </div>
+        
+        <div class="stage-item stage-2">
+          <span class="stage-name">2차면접</span>
+          <span class="stage-count">1명</span>
+        </div>
+        
+        <div class="stage-item stage-3">
+          <span class="stage-name">서류전형</span>
+          <span class="stage-count">4명</span>
+        </div>
+        
+        <div class="stage-item stage-4">
+          <span class="stage-name">최종합격</span>
+          <span class="stage-count">1명</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Applicants Table -->
+    <div class="dashboard-section">
+      <h2 class="section-title">
+        <div class="section-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        최근 지원자 (상위 5명)
+      </h2>
+      
+      <table class="applicants-table">
+        <thead>
+          <tr>
+            <th>지원자명</th>
+            <th>지원공고</th>
+            <th>법인</th>
+            <th>경력</th>
+            <th>AI 점수</th>
+            <th>상태</th>
+            <th>지원일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="applicant-name">김민준</div>
+              <div class="applicant-email">minjun.kim@email.com</div>
+            </td>
+            <td>AI 연구원 (머신러닝/딥러닝)</td>
+            <td>JSH 지주사</td>
+            <td>4년</td>
+            <td><span class="score-badge score-high">96</span></td>
+            <td><span class="status-badge status-1">2차면접</span></td>
+            <td>2026. 1. 11.</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="applicant-name">윤도현</div>
+              <div class="applicant-email">dohyun.yoon@email.com</div>
+            </td>
+            <td>AI 연구원 (머신러닝/딥러닝)</td>
+            <td>JSH 지주사</td>
+            <td>5년</td>
+            <td><span class="score-badge score-high">98</span></td>
+            <td><span class="status-badge status-2">1차면접</span></td>
+            <td>2026. 1. 11.</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="applicant-name">이서연</div>
+              <div class="applicant-email">seoyeon.lee@email.com</div>
+            </td>
+            <td>인사기획 담당자 (HR Planning)</td>
+            <td>JSH 지주사</td>
+            <td>3년</td>
+            <td><span class="score-badge score-medium">88</span></td>
+            <td><span class="status-badge status-3">서류전형</span></td>
+            <td>2026. 1. 11.</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="applicant-name">강혜진</div>
+              <div class="applicant-email">yejin.kang@email.com</div>
+            </td>
+            <td>인사기획 담당자 (HR Planning)</td>
+            <td>JSH 지주사</td>
+            <td>2년</td>
+            <td><span class="score-badge score-low">66</span></td>
+            <td><span class="status-badge status-3">서류전형</span></td>
+            <td>2026. 1. 11.</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="applicant-name">박지훈</div>
+              <div class="applicant-email">jihoon.park@email.com</div>
+            </td>
+            <td>풀스택 개발자 (Full-Stack Developer)</td>
+            <td>JSH테크놀로지</td>
+            <td>7년</td>
+            <td><span class="score-badge score-high">95</span></td>
+            <td><span class="status-badge status-4">최종합격</span></td>
+            <td>2026. 1. 11.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>경기도 용인시 수지구 죽전로 152 단국대학교 소프트웨어 ICT관 512호</p>
+        <p>대표전화: 031-8005-3500 | 이메일: hr@jsh.com</p>
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Dropdown menu functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const navItems = document.querySelectorAll('.nav-item');
+      let currentActiveItem = null;
+      
+      navItems.forEach(item => {
+        const link = item.querySelector('.nav-link');
+        const dropdownMenu = item.querySelector('.dropdown-menu');
+        
+        if (link && dropdownMenu) {
+          // Click to toggle dropdown
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // If clicking the same item, toggle it
+            if (currentActiveItem === item) {
+              item.classList.toggle('active');
+              if (!item.classList.contains('active')) {
+                currentActiveItem = null;
+              }
+            } else {
+              // Close all other dropdowns
+              navItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('active');
+                }
+              });
+              
+              // Open this dropdown
+              item.classList.add('active');
+              currentActiveItem = item;
+            }
+          });
+          
+          // Hover effect (visual only, doesn't open)
+          item.addEventListener('mouseenter', () => {
+            if (currentActiveItem !== item) {
+              item.classList.add('active');
+            }
+          });
+          
+          item.addEventListener('mouseleave', () => {
+            if (currentActiveItem !== item) {
+              item.classList.remove('active');
+            }
+          });
+        }
+      });
+      
+      // Close dropdowns when clicking outside (but not inside dropdown menu)
+      document.addEventListener('click', (e) => {
+        // Don't close if clicking inside dropdown menu
+        if (e.target.closest('.dropdown-menu')) {
+          return;
+        }
+        
+        // Close if clicking outside nav area
+        if (!e.target.closest('.nav-item')) {
+          navItems.forEach(item => {
+            item.classList.remove('active');
+          });
+          currentActiveItem = null;
+        }
+      });
+      
+      // Close dropdowns with ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          navItems.forEach(item => {
+            item.classList.remove('active');
+          });
+          currentActiveItem = null;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

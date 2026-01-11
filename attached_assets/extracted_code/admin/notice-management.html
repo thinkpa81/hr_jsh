@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 관리 - JSH HR 포털</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Include Header -->
+  <div id="header-placeholder"></div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1><i class="fas fa-bullhorn"></i> 공지사항 관리</h1>
+      <p>관리자 권한으로 공지사항을 작성, 수정, 삭제하세요</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Authorization Check -->
+      <div class="dashboard-section" style="margin-bottom: 24px; background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border-left: 4px solid #F59E0B;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <i class="fas fa-shield-alt" style="font-size: 24px; color: #D97706;"></i>
+          <div>
+            <h3 style="margin: 0; color: #92400E;">관리자 권한 필요</h3>
+            <p style="margin: 4px 0 0 0; color: #92400E;">이 페이지는 레벨 5 관리자만 접근 가능합니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: 12px; margin-bottom: 32px; justify-content: space-between; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="showCreateModal()">
+          <i class="fas fa-plus"></i> 새 공지사항 작성
+        </button>
+        <div style="display: flex; gap: 12px;">
+          <select id="filterCategory" class="form-input" style="width: 150px;">
+            <option value="">전체 분류</option>
+            <option value="system">시스템</option>
+            <option value="recruit">채용</option>
+            <option value="education">교육</option>
+            <option value="hr">인사/HR</option>
+            <option value="etc">기타</option>
+          </select>
+          <button class="btn btn-outline" onclick="refreshList()">
+            <i class="fas fa-sync-alt"></i> 새로고침
+          </button>
+        </div>
+      </div>
+
+      <!-- Notice List -->
+      <div class="dashboard-section">
+        <h2 class="section-title" style="margin-bottom: 24px;">
+          <div class="section-icon" style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);">
+            <i class="fas fa-list"></i>
+          </div>
+          공지사항 목록 <span id="noticeCount" style="color: var(--primary-color);">(5개)</span>
+        </h2>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 40px;">
+                  <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+                </th>
+                <th style="width: 100px;">분류</th>
+                <th>제목</th>
+                <th style="width: 100px;">작성자</th>
+                <th style="width: 100px;">등록일</th>
+                <th style="width: 80px;">조회수</th>
+                <th style="width: 80px;">중요</th>
+                <th style="width: 150px;">작업</th>
+              </tr>
+            </thead>
+            <tbody id="noticeList">
+              <tr data-id="1">
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td><span class="badge badge-warning">시스템</span></td>
+                <td>
+                  <div style="font-weight: 600;">[필독] 2026년 상반기 시스템 업그레이드 안내</div>
+                  <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                    시스템 업그레이드가 진행됩니다.
+                  </div>
+                </td>
+                <td>관리자</td>
+                <td>2026.01.15</td>
+                <td>548</td>
+                <td>
+                  <span class="status-badge" style="background: #FFD700; color: #333;">
+                    <i class="fas fa-star"></i> 중요
+                  </span>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="수정" onclick="editNotice(1)">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon" title="삭제" onclick="deleteNotice(1)">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-id="2">
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td><span class="badge badge-primary">채용</span></td>
+                <td>
+                  <div style="font-weight: 600;">2026년 상반기 공개채용 일정 안내</div>
+                  <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                    공개채용 일정이 확정되었습니다.
+                  </div>
+                </td>
+                <td>채용팀</td>
+                <td>2026.01.12</td>
+                <td>324</td>
+                <td>-</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="수정" onclick="editNotice(2)">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon" title="삭제" onclick="deleteNotice(2)">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-id="3">
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td><span class="badge badge-success">교육</span></td>
+                <td>
+                  <div style="font-weight: 600;">신규 교육과정 개설 안내 (Python, React)</div>
+                  <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                    2월부터 신규 교육과정이 개설됩니다.
+                  </div>
+                </td>
+                <td>교육팀</td>
+                <td>2026.01.10</td>
+                <td>287</td>
+                <td>-</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="수정" onclick="editNotice(3)">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon" title="삭제" onclick="deleteNotice(3)">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-id="4">
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td><span class="badge badge-info">인사/HR</span></td>
+                <td>
+                  <div style="font-weight: 600;">2025년 하반기 인사평가 결과 공지</div>
+                  <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                    평가 결과가 개인별로 통보되었습니다.
+                  </div>
+                </td>
+                <td>인사팀</td>
+                <td>2026.01.08</td>
+                <td>512</td>
+                <td>-</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="수정" onclick="editNotice(4)">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon" title="삭제" onclick="deleteNotice(4)">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-id="5">
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td><span class="badge badge-secondary">기타</span></td>
+                <td>
+                  <div style="font-weight: 600;">설 연휴 기간 고객센터 운영 안내</div>
+                  <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                    설 연휴 기간 고객센터 운영 시간이 조정됩니다.
+                  </div>
+                </td>
+                <td>관리자</td>
+                <td>2026.01.05</td>
+                <td>198</td>
+                <td>-</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="수정" onclick="editNotice(5)">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon" title="삭제" onclick="deleteNotice(5)">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bulk Actions -->
+        <div style="margin-top: 24px; display: flex; gap: 12px;">
+          <button class="btn btn-outline" onclick="bulkDelete()">
+            <i class="fas fa-trash"></i> 선택 삭제
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 JSH HR Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Create/Edit Modal -->
+  <div id="noticeModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 800px;">
+      <div class="modal-header">
+        <h2 id="modalTitle"><i class="fas fa-plus"></i> 새 공지사항 작성</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="noticeForm">
+          <input type="hidden" id="noticeId">
+          
+          <div class="form-group">
+            <label>분류 <span style="color: red;">*</span></label>
+            <select id="noticeCategory" class="form-input" required>
+              <option value="">선택하세요</option>
+              <option value="system">시스템</option>
+              <option value="recruit">채용</option>
+              <option value="education">교육</option>
+              <option value="hr">인사/HR</option>
+              <option value="etc">기타</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>제목 <span style="color: red;">*</span></label>
+            <input type="text" id="noticeTitle" class="form-input" placeholder="공지사항 제목을 입력하세요" required>
+          </div>
+
+          <div class="form-group">
+            <label>내용 <span style="color: red;">*</span></label>
+            <textarea id="noticeContent" class="form-input" rows="10" placeholder="공지사항 내용을 입력하세요" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="noticeImportant" style="margin-right: 8px;">
+              중요 공지로 설정
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>작성자</label>
+            <input type="text" id="noticeAuthor" class="form-input" placeholder="작성자명" value="관리자">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal()">취소</button>
+        <button class="btn btn-primary" onclick="saveNotice()">
+          <i class="fas fa-save"></i> 저장
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load header
+    fetch('../includes/header.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+      });
+
+    // Toggle select all
+    function toggleSelectAll() {
+      const selectAll = document.getElementById('selectAll');
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAll.checked;
+      });
+    }
+
+    // Show create modal
+    function showCreateModal() {
+      document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus"></i> 새 공지사항 작성';
+      document.getElementById('noticeForm').reset();
+      document.getElementById('noticeId').value = '';
+      document.getElementById('noticeModal').style.display = 'flex';
+    }
+
+    // Edit notice
+    function editNotice(id) {
+      // In a real application, this would fetch data from server
+      document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> 공지사항 수정';
+      document.getElementById('noticeId').value = id;
+      
+      // Sample data
+      document.getElementById('noticeCategory').value = 'system';
+      document.getElementById('noticeTitle').value = '샘플 공지사항 제목';
+      document.getElementById('noticeContent').value = '샘플 공지사항 내용입니다.';
+      document.getElementById('noticeImportant').checked = false;
+      document.getElementById('noticeAuthor').value = '관리자';
+      
+      document.getElementById('noticeModal').style.display = 'flex';
+    }
+
+    // Delete notice
+    function deleteNotice(id) {
+      if (!confirm('이 공지사항을 삭제하시겠습니까?')) {
+        return;
+      }
+
+      const row = document.querySelector(`tr[data-id="${id}"]`);
+      if (row) {
+        row.style.transition = 'all 0.3s ease';
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(-20px)';
+        
+        setTimeout(() => {
+          row.remove();
+          updateNoticeCount();
+          showToast('공지사항이 삭제되었습니다.', 'success');
+        }, 300);
+      }
+    }
+
+    // Bulk delete
+    function bulkDelete() {
+      const checked = document.querySelectorAll('.row-checkbox:checked');
+      if (checked.length === 0) {
+        alert('삭제할 공지사항을 선택해주세요.');
+        return;
+      }
+
+      if (!confirm(`선택된 ${checked.length}개의 공지사항을 삭제하시겠습니까?`)) {
+        return;
+      }
+
+      checked.forEach(checkbox => {
+        const row = checkbox.closest('tr');
+        const id = row.getAttribute('data-id');
+        deleteNotice(id);
+      });
+    }
+
+    // Save notice
+    function saveNotice() {
+      const id = document.getElementById('noticeId').value;
+      const category = document.getElementById('noticeCategory').value;
+      const title = document.getElementById('noticeTitle').value;
+      const content = document.getElementById('noticeContent').value;
+      const important = document.getElementById('noticeImportant').checked;
+      const author = document.getElementById('noticeAuthor').value;
+
+      if (!category || !title || !content) {
+        alert('필수 항목을 모두 입력해주세요.');
+        return;
+      }
+
+      // In a real application, this would save to database
+      console.log('Saving notice:', { id, category, title, content, important, author });
+      
+      if (id) {
+        showToast('공지사항이 수정되었습니다.', 'success');
+      } else {
+        showToast('새 공지사항이 작성되었습니다.', 'success');
+      }
+
+      closeModal();
+      
+      // Reload after 1 second
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('noticeModal').style.display = 'none';
+    }
+
+    // Refresh list
+    function refreshList() {
+      showToast('목록을 새로고침합니다.', 'info');
+      location.reload();
+    }
+
+    // Update notice count
+    function updateNoticeCount() {
+      const count = document.querySelectorAll('#noticeList tr').length;
+      document.getElementById('noticeCount').textContent = `(${count}개)`;
+    }
+
+    // Toast notification
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#3B82F6'};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+      `;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Close modal on outside click
+    window.onclick = function(event) {
+      const modal = document.getElementById('noticeModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: #F3F4F6;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: #E5E7EB;
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 24px;
+      border-top: 1px solid #E5E7EB;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  </style>
+
+</body>
+</html>

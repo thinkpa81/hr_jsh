@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 대시보드 - 코아시아 HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div class="container" style="margin: 48px auto 80px;">
+    <h1 style="margin-bottom: 32px;"><i class="fas fa-tachometer-alt"></i> 관리자 대시보드</h1>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-4" style="margin-bottom: 48px;">
+      <div class="card text-center" style="padding: 32px;">
+        <i class="fas fa-users" style="font-size: 48px; color: var(--primary-color); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 32px; color: var(--primary-color);" id="total-users">0</h3>
+        <p style="color: var(--text-secondary);">전체 회원</p>
+      </div>
+      <div class="card text-center" style="padding: 32px;">
+        <i class="fas fa-briefcase" style="font-size: 48px; color: var(--accent-color); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 32px; color: var(--accent-color);" id="active-jobs">0</h3>
+        <p style="color: var(--text-secondary);">진행중 채용</p>
+      </div>
+      <div class="card text-center" style="padding: 32px;">
+        <i class="fas fa-file-alt" style="font-size: 48px; color: var(--success-color); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 32px; color: var(--success-color);" id="total-applications">0</h3>
+        <p style="color: var(--text-secondary);">총 지원자</p>
+      </div>
+      <div class="card text-center" style="padding: 32px;">
+        <i class="fas fa-graduation-cap" style="font-size: 48px; color: var(--info-color); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 32px; color: var(--info-color);" id="active-courses">0</h3>
+        <p style="color: var(--text-secondary);">교육과정</p>
+      </div>
+    </div>
+
+    <!-- Recent Activities -->
+    <div class="grid grid-2">
+      <div class="card" style="padding: 32px;">
+        <h3 style="margin-bottom: 24px;"><i class="fas fa-clock"></i> 최근 지원자</h3>
+        <div id="recent-applications">
+          <p style="text-align: center; color: var(--text-secondary); padding: 40px;">데이터를 불러오는 중...</p>
+        </div>
+      </div>
+
+      <div class="card" style="padding: 32px;">
+        <h3 style="margin-bottom: 24px;"><i class="fas fa-chart-bar"></i> 부문별 채용 현황</h3>
+        <div id="department-stats">
+          <p style="text-align: center; color: var(--text-secondary); padding: 40px;">데이터를 불러오는 중...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    if (!Auth.requireAuth(5)) {
+      alert('관리자 권한이 필요합니다.');
+      window.location.href = '../index.html';
+    }
+
+    async function loadDashboard() {
+      try {
+        const [users, jobs, applications, courses] = await Promise.all([
+          fetch('tables/users').then(r => r.json()),
+          fetch('tables/jobs?status=active').then(r => r.json()),
+          fetch('tables/applications').then(r => r.json()),
+          fetch('tables/courses?status=active').then(r => r.json())
+        ]);
+
+        document.getElementById('total-users').textContent = users.total || 0;
+        document.getElementById('active-jobs').textContent = jobs.total || 0;
+        document.getElementById('total-applications').textContent = applications.total || 0;
+        document.getElementById('active-courses').textContent = courses.total || 0;
+
+        // Recent applications
+        if (applications.data && applications.data.length > 0) {
+          document.getElementById('recent-applications').innerHTML = applications.data.slice(0, 5).map(app => `
+            <div style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+              <strong>${app.name}</strong>
+              <div style="font-size: 13px; color: var(--text-secondary);">
+                ${Utils.formatDate(app.created_at, 'YYYY-MM-DD HH:mm')}
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Department stats
+        if (jobs.data && jobs.data.length > 0) {
+          const deptStats = {};
+          jobs.data.forEach(job => {
+            deptStats[job.department] = (deptStats[job.department] || 0) + 1;
+          });
+
+          document.getElementById('department-stats').innerHTML = Object.entries(deptStats).map(([dept, count]) => `
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span>${dept}</span>
+                <strong>${count}개</strong>
+              </div>
+              <div style="height: 8px; background: var(--surface-color); border-radius: 4px; overflow: hidden;">
+                <div style="height: 100%; background: var(--primary-color); width: ${(count / jobs.total * 100)}%;"></div>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (error) {
+        console.error('Failed to load dashboard:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadDashboard);
+  </script>
+</body>
+</html>

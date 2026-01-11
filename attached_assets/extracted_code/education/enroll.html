@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수강신청 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 64px 0; margin-bottom: 48px;">
+    <div class="container">
+      <h1 style="font-size: 40px; margin-bottom: 16px; color: white;">
+        <i class="fas fa-book-reader"></i> 수강신청
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9);">
+        원하는 교육과정을 선택하고 수강신청 하세요 <span style="font-size: 14px; color: rgba(255,255,255,0.7);">(예시)</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 80px;">
+    <!-- 필터 및 검색 -->
+    <div class="card" style="margin-bottom: 32px; padding: 24px;">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <div style="flex: 1; min-width: 250px;">
+          <input type="text" id="search-input" placeholder="교육과정명으로 검색" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+        </div>
+        <select id="category-filter" style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <option value="">전체 분야</option>
+          <option value="tech">기술/개발</option>
+          <option value="hr">인사/HR</option>
+          <option value="management">경영/리더십</option>
+          <option value="data">데이터분석</option>
+        </select>
+        <select id="level-filter" style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <option value="">전체 레벨</option>
+          <option value="basic">기초</option>
+          <option value="intermediate">중급</option>
+          <option value="advanced">고급</option>
+        </select>
+        <button class="btn btn-primary" onclick="applyFilters()">
+          <i class="fas fa-search"></i> 검색
+        </button>
+      </div>
+    </div>
+
+    <!-- 수강 신청 현황 -->
+    <div class="grid grid-3" style="margin-bottom: 48px;">
+      <div class="card text-center" style="padding: 24px; background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white;">
+        <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 8px; color: white;">24</h3>
+        <p style="margin: 0; font-size: 14px; color: rgba(255,255,255,0.9);">전체 교육과정</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 24px; background: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%); color: white;">
+        <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 8px; color: white;">5</h3>
+        <p style="margin: 0; font-size: 14px; color: rgba(255,255,255,0.9);">신청 가능</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 24px; background: linear-gradient(135deg, #28a745 0%, #218838 100%); color: white;">
+        <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 8px; color: white;">3</h3>
+        <p style="margin: 0; font-size: 14px; color: rgba(255,255,255,0.9);">수강중</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+    </div>
+
+    <!-- 교육과정 목록 -->
+    <h2 style="margin-bottom: 24px;">신청 가능한 교육과정 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span></h2>
+    
+    <div class="grid grid-2" id="courses-container">
+      <!-- 교육과정 1 -->
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-primary">기술/개발</span>
+            <span class="badge badge-success">신청가능</span>
+          </div>
+          <h3 class="card-title">Python 데이터 분석 기초</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+            Python을 활용한 데이터 분석의 기초를 학습합니다
+          </p>
+          <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-signal" style="width: 20px; color: var(--success-color);"></i> 기초
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-clock" style="width: 20px;"></i> 8주 (주 2회, 총 16강)
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-calendar" style="width: 20px;"></i> 2026.02.01 ~ 2026.03.28
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-user" style="width: 20px;"></i> 정원: 20명 (잔여: 8명)
+            </div>
+            <div>
+              <i class="fas fa-won-sign" style="width: 20px;"></i> 무료
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm" onclick="showCourseDetail()">
+            상세보기
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="enrollCourse()">
+            <i class="fas fa-plus"></i> 수강신청
+          </button>
+        </div>
+      </div>
+
+      <!-- 교육과정 2 -->
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-accent">인사/HR</span>
+            <span class="badge badge-success">신청가능</span>
+          </div>
+          <h3 class="card-title">HR Analytics 실무</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+            데이터 기반 인사 의사결정을 위한 분석 역량 강화
+          </p>
+          <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-signal" style="width: 20px; color: var(--warning-color);"></i> 중급
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-clock" style="width: 20px;"></i> 6주 (주 1회, 총 6강)
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-calendar" style="width: 20px;"></i> 2026.02.10 ~ 2026.03.24
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-user" style="width: 20px;"></i> 정원: 15명 (잔여: 5명)
+            </div>
+            <div>
+              <i class="fas fa-won-sign" style="width: 20px;"></i> 무료
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm" onclick="showCourseDetail()">
+            상세보기
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="enrollCourse()">
+            <i class="fas fa-plus"></i> 수강신청
+          </button>
+        </div>
+      </div>
+
+      <!-- 교육과정 3 -->
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-info">경영/리더십</span>
+            <span class="badge badge-success">신청가능</span>
+          </div>
+          <h3 class="card-title">신임 리더 리더십 과정</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+            새로운 리더를 위한 필수 리더십 역량 개발
+          </p>
+          <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-signal" style="width: 20px; color: var(--success-color);"></i> 기초
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-clock" style="width: 20px;"></i> 4주 (주 1회, 총 4강)
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-calendar" style="width: 20px;"></i> 2026.02.15 ~ 2026.03.08
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-user" style="width: 20px;"></i> 정원: 25명 (잔여: 12명)
+            </div>
+            <div>
+              <i class="fas fa-won-sign" style="width: 20px;"></i> 무료
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm" onclick="showCourseDetail()">
+            상세보기
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="enrollCourse()">
+            <i class="fas fa-plus"></i> 수강신청
+          </button>
+        </div>
+      </div>
+
+      <!-- 교육과정 4 - 마감된 과정 예시 -->
+      <div class="card" style="opacity: 0.7;">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-primary">기술/개발</span>
+            <span class="badge badge-secondary">마감</span>
+          </div>
+          <h3 class="card-title">React 프론트엔드 개발</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+            React를 활용한 모던 웹 애플리케이션 개발
+          </p>
+          <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-signal" style="width: 20px; color: var(--warning-color);"></i> 중급
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-clock" style="width: 20px;"></i> 10주 (주 2회, 총 20강)
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-calendar" style="width: 20px;"></i> 2026.01.15 ~ 2026.03.25
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-user" style="width: 20px;"></i> 정원: 18명 (잔여: 0명)
+            </div>
+            <div>
+              <i class="fas fa-won-sign" style="width: 20px;"></i> 무료
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm" onclick="showCourseDetail()">
+            상세보기
+          </button>
+          <button class="btn btn-secondary btn-sm" disabled>
+            마감
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 수강 신청 안내 -->
+    <div class="card" style="margin-top: 48px; padding: 32px; background: linear-gradient(135deg, #F7F9FC 0%, #E8F1F8 100%);">
+      <h3 style="margin-bottom: 20px;"><i class="fas fa-info-circle"></i> 수강신청 안내</h3>
+      <ul style="color: var(--text-secondary); line-height: 2;">
+        <li>수강신청 기간: 각 교육과정 시작 2주 전부터 가능</li>
+        <li>선착순 마감: 정원이 마감되면 신청이 불가합니다</li>
+        <li>수강 취소: 교육 시작 3일 전까지 취소 가능</li>
+        <li>출석 기준: 전체 강의의 80% 이상 출석 필수</li>
+        <li>수료 기준: 출석 80% + 과제 제출 완료 시 수료증 발급</li>
+        <li>동시 수강: 최대 3개 과정까지 동시 수강 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function applyFilters() {
+      const search = document.getElementById('search-input').value;
+      const category = document.getElementById('category-filter').value;
+      const level = document.getElementById('level-filter').value;
+      
+      console.log('Filtering:', { search, category, level });
+      alert('필터가 적용되었습니다. (예시 기능)');
+    }
+
+    function showCourseDetail() {
+      alert('교육과정 상세 정보를 보여줍니다. (예시 기능)');
+    }
+
+    function enrollCourse() {
+      if (confirm('이 교육과정을 신청하시겠습니까?')) {
+        alert('수강신청이 완료되었습니다! (예시 기능)\n나의 학습이력에서 확인하실 수 있습니다.');
+      }
+    }
+  </script>
+</body>
+</html>

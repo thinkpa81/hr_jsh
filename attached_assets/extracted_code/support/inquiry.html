@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1:1 문의 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 64px 0; margin-bottom: 48px;">
+    <div class="container">
+      <h1 style="font-size: 40px; margin-bottom: 16px; color: white;">
+        <i class="fas fa-comment-dots"></i> 1:1 문의
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9);">
+        궁금하신 사항을 문의해주세요. 빠르게 답변드리겠습니다 <span style="font-size: 14px; color: rgba(255,255,255,0.7);">(예시)</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 80px; max-width: 900px;">
+    <!-- 안내 -->
+    <div class="card" style="margin-bottom: 32px; padding: 24px; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-left: 4px solid var(--success-color);">
+      <div style="display: flex; align-items: start; gap: 16px;">
+        <i class="fas fa-info-circle" style="font-size: 24px; color: var(--success-color); margin-top: 4px;"></i>
+        <div>
+          <h4 style="margin-bottom: 8px; color: var(--success-color);">문의 전 확인사항</h4>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0;">
+            <li>FAQ에서 답변을 먼저 확인해보세요</li>
+            <li>답변은 영업일 기준 1~2일 이내에 제공됩니다</li>
+            <li>긴급한 경우 고객센터(031-8005-3500)로 연락주세요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 문의 작성 폼 -->
+    <div class="card" style="padding: 40px;">
+      <h2 style="margin-bottom: 32px;">문의하기 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span></h2>
+      
+      <form id="inquiry-form" onsubmit="submitInquiry(event)">
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600;">문의 유형 <span style="color: var(--error-color);">*</span></label>
+          <select required style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+            <option value="">선택해주세요</option>
+            <option value="account">계정/로그인</option>
+            <option value="recruit">채용</option>
+            <option value="education">교육</option>
+            <option value="hr">인사/HR</option>
+            <option value="system">시스템 오류</option>
+            <option value="etc">기타</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600;">제목 <span style="color: var(--error-color);">*</span></label>
+          <input type="text" required placeholder="제목을 입력하세요" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600;">문의 내용 <span style="color: var(--error-color);">*</span></label>
+          <textarea required placeholder="문의하실 내용을 자세히 입력해주세요" rows="10" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px; resize: vertical;"></textarea>
+          <div style="text-align: right; margin-top: 8px; font-size: 13px; color: var(--text-secondary);">
+            최소 10자 이상 입력해주세요
+          </div>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600;">이메일 <span style="color: var(--error-color);">*</span></label>
+          <input type="email" required placeholder="답변을 받을 이메일 주소" value="user@example.com" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <div style="margin-top: 8px; font-size: 13px; color: var(--text-secondary);">
+            답변은 입력하신 이메일로 발송됩니다
+          </div>
+        </div>
+
+        <div style="margin-bottom: 32px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600;">첨부파일</label>
+          <input type="file" multiple style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <div style="margin-top: 8px; font-size: 13px; color: var(--text-secondary);">
+            최대 5개 파일, 각 10MB 이하 (JPG, PNG, PDF, DOC 등)
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 16px; justify-content: center;">
+          <button type="reset" class="btn btn-outline btn-lg">
+            <i class="fas fa-redo"></i> 다시 작성
+          </button>
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fas fa-paper-plane"></i> 문의 제출
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 나의 문의 내역 -->
+    <h2 style="margin-top: 64px; margin-bottom: 24px;">나의 문의 내역 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span></h2>
+    
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px; cursor: pointer;" onclick="alert('문의 상세 내용을 표시합니다. (예시)')">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+          <div>
+            <span class="badge badge-success" style="margin-right: 8px;">교육</span>
+            <span class="badge badge-primary">답변완료</span>
+          </div>
+          <span style="color: var(--text-secondary); font-size: 13px;">2026.01.10</span>
+        </div>
+        <h3 style="margin-bottom: 8px; font-size: 17px;">교육 수강신청 취소 관련 문의</h3>
+        <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">
+          Python 교육과정 수강신청을 취소하고 싶은데 어떻게 해야 하나요?
+        </p>
+        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+          <div style="display: flex; align-items: start; gap: 12px;">
+            <i class="fas fa-reply" style="color: var(--primary-color); margin-top: 4px;"></i>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">
+                답변 | 교육팀 | 2026.01.11
+              </div>
+              <p style="color: var(--text-secondary); line-height: 1.6; margin: 0; font-size: 14px;">
+                안녕하세요. 나의 학습이력 페이지에서 해당 교육과정의 '수강 취소' 버튼을 클릭하시면 됩니다. 교육 시작 3일 전까지 취소 가능합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px; cursor: pointer;" onclick="alert('문의 상세 내용을 표시합니다. (예시)')">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+          <div>
+            <span class="badge badge-warning" style="margin-right: 8px;">시스템</span>
+            <span class="badge badge-secondary">처리중</span>
+          </div>
+          <span style="color: var(--text-secondary); font-size: 13px;">2026.01.13</span>
+        </div>
+        <h3 style="margin-bottom: 8px; font-size: 17px;">로그인 오류 발생</h3>
+        <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">
+          비밀번호를 정확히 입력했는데도 로그인이 안 됩니다. 확인 부탁드립니다.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body" style="padding: 24px; cursor: pointer;" onclick="alert('문의 상세 내용을 표시합니다. (예시)')">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+          <div>
+            <span class="badge badge-primary" style="margin-right: 8px;">채용</span>
+            <span class="badge badge-primary">답변완료</span>
+          </div>
+          <span style="color: var(--text-secondary); font-size: 13px;">2026.01.05</span>
+        </div>
+        <h3 style="margin-bottom: 8px; font-size: 17px;">지원서 수정 가능 여부 문의</h3>
+        <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">
+          제출한 지원서를 수정할 수 있나요?
+        </p>
+        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+          <div style="display: flex; align-items: start; gap: 12px;">
+            <i class="fas fa-reply" style="color: var(--primary-color); margin-top: 4px;"></i>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">
+                답변 | 채용팀 | 2026.01.06
+              </div>
+              <p style="color: var(--text-secondary); line-height: 1.6; margin: 0; font-size: 14px;">
+                네, 가능합니다. 채용 마감일 이전까지는 나의 지원내역 페이지에서 자유롭게 수정하실 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 연락처 정보 -->
+    <div class="card" style="margin-top: 48px; padding: 32px; background: linear-gradient(135deg, #F7F9FC 0%, #E8F1F8 100%);">
+      <h3 style="margin-bottom: 20px; text-align: center;">다른 방법으로 문의하기</h3>
+      <div class="grid grid-3">
+        <div style="text-align: center; padding: 20px;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px;">
+            <i class="fas fa-phone"></i>
+          </div>
+          <h4 style="margin-bottom: 8px;">전화 문의</h4>
+          <p style="color: var(--text-secondary); margin: 0;">031-8005-3500</p>
+          <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">평일 09:00 ~ 18:00</p>
+        </div>
+        
+        <div style="text-align: center; padding: 20px;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--accent-color); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px;">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h4 style="margin-bottom: 8px;">이메일</h4>
+          <p style="color: var(--text-secondary); margin: 0;">support@jsh.com</p>
+          <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">24시간 접수</p>
+        </div>
+        
+        <div style="text-align: center; padding: 20px;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--success-color); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px;">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h4 style="margin-bottom: 8px;">방문 상담</h4>
+          <p style="color: var(--text-secondary); margin: 0; font-size: 13px; line-height: 1.6;">경기도 용인시 수지구<br>죽전로 152</p>
+          <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">예약 필수</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function submitInquiry(event) {
+      event.preventDefault();
+      alert('문의가 성공적으로 접수되었습니다! (예시 기능)\n\n영업일 기준 1~2일 이내에 답변드리겠습니다.\n답변은 등록하신 이메일로 발송됩니다.');
+      document.getElementById('inquiry-form').reset();
+    }
+  </script>
+</body>
+</html>

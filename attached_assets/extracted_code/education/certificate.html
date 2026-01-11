@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수료증 발급 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 64px 0; margin-bottom: 48px;">
+    <div class="container">
+      <h1 style="font-size: 40px; margin-bottom: 16px; color: white;">
+        <i class="fas fa-certificate"></i> 수료증 발급
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9);">
+        수료한 교육과정의 수료증을 발급받으세요 <span style="font-size: 14px; color: rgba(255,255,255,0.7);">(예시)</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 80px;">
+    <!-- 통계 -->
+    <div class="grid grid-3" style="margin-bottom: 48px;">
+      <div class="card text-center" style="padding: 32px; background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white;">
+        <div style="font-size: 48px; margin-bottom: 16px;">
+          <i class="fas fa-award"></i>
+        </div>
+        <h3 style="font-size: 36px; font-weight: 700; margin-bottom: 8px; color: white;">12</h3>
+        <p style="margin: 0; font-size: 16px; color: rgba(255,255,255,0.9);">발급 가능</p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 32px; background: linear-gradient(135deg, #28a745 0%, #218838 100%); color: white;">
+        <div style="font-size: 48px; margin-bottom: 16px;">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 style="font-size: 36px; font-weight: 700; margin-bottom: 8px; color: white;">10</h3>
+        <p style="margin: 0; font-size: 16px; color: rgba(255,255,255,0.9);">발급 완료</p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 32px; background: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%); color: white;">
+        <div style="font-size: 48px; margin-bottom: 16px;">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3 style="font-size: 36px; font-weight: 700; margin-bottom: 8px; color: white;">4.8</h3>
+        <p style="margin: 0; font-size: 16px; color: rgba(255,255,255,0.9);">평균 평점</p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.6);">(예시)</p>
+      </div>
+    </div>
+
+    <!-- 발급 가능한 수료증 -->
+    <h2 style="margin-bottom: 24px;">발급 가능한 수료증 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span></h2>
+    
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-success">발급 가능</span>
+            <span style="color: #FFD700; font-size: 20px;"><i class="fas fa-star"></i> 4.9</span>
+          </div>
+          <h3 class="card-title">Python 데이터 분석 기초</h3>
+          <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-calendar-check" style="width: 20px;"></i> 수료일: 2025.12.20
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-check-circle" style="width: 20px; color: var(--success-color);"></i> 출석률: 100%
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-tasks" style="width: 20px; color: var(--info-color);"></i> 과제: 8/8 제출
+            </div>
+            <div>
+              <i class="fas fa-trophy" style="width: 20px; color: #FFD700;"></i> 최종 성적: 95점
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm" onclick="previewCertificate()">
+            <i class="fas fa-eye"></i> 미리보기
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="downloadCertificate()">
+            <i class="fas fa-download"></i> PDF 다운로드
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span class="badge badge-success">발급 가능</span>
+            <span style="color: #FFD700; font-size: 20px;"><i class="fas fa-star"></i> 4.7</span>
+          </div>
+          <h3 class="card-title">SQL 데이터베이스 기초</h3>
+          <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-calendar-check" style="width: 20px;"></i> 수료일: 2025.11.15
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-check-circle" style="width: 20px; color: var(--success-color);"></i> 출석률: 95%
+            </div>
+            <div style="margin-bottom: 8px;">
+              <i class="fas fa-tasks" style="width: 20px; color: var(--info-color);"></i> 과제: 6/6 제출
+            </div>
+            <div>
+              <i class="fas fa-trophy" style="width: 20px; color: #FFD700;"></i> 최종 성적: 92점
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline btn-sm" onclick="previewCertificate()">
+            <i class="fas fa-eye"></i> 미리보기
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="downloadCertificate()">
+            <i class="fas fa-download"></i> PDF 다운로드
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 발급 완료된 수료증 -->
+    <h2 style="margin-top: 64px; margin-bottom: 24px;">발급 완료된 수료증 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span></h2>
+    
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-certificate" style="font-size: 36px; color: white;"></i>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 8px; font-size: 17px;">JavaScript 기초 프로그래밍</h3>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+              <span><i class="fas fa-calendar-check"></i> 수료일: 2025.10.20</span>
+              <span><i class="fas fa-download"></i> 발급일: 2025.10.22</span>
+              <span><i class="fas fa-star" style="color: #FFD700;"></i> 평점: 4.8</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" onclick="previewCertificate()">
+              <i class="fas fa-eye"></i> 보기
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="downloadCertificate()">
+              <i class="fas fa-download"></i> 재다운로드
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-certificate" style="font-size: 36px; color: white;"></i>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 8px; font-size: 17px;">웹 프론트엔드 개발 입문</h3>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+              <span><i class="fas fa-calendar-check"></i> 수료일: 2025.09.15</span>
+              <span><i class="fas fa-download"></i> 발급일: 2025.09.16</span>
+              <span><i class="fas fa-star" style="color: #FFD700;"></i> 평점: 4.9</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" onclick="previewCertificate()">
+              <i class="fas fa-eye"></i> 보기
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="downloadCertificate()">
+              <i class="fas fa-download"></i> 재다운로드
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 수료증 샘플 -->
+    <div class="card" style="margin-top: 48px; padding: 40px; background: linear-gradient(135deg, #F7F9FC 0%, #E8F1F8 100%);">
+      <h3 style="text-align: center; margin-bottom: 24px;"><i class="fas fa-award"></i> 수료증 샘플</h3>
+      <div style="border: 4px double var(--primary-color); padding: 48px; background: white; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+        <div style="margin-bottom: 32px;">
+          <i class="fas fa-certificate" style="font-size: 72px; color: var(--primary-color);"></i>
+        </div>
+        <h2 style="font-size: 32px; margin-bottom: 24px; color: var(--primary-color);">수 료 증</h2>
+        <p style="font-size: 18px; margin-bottom: 16px; font-weight: 600;">이름: 홍길동</p>
+        <p style="color: var(--text-secondary); margin-bottom: 32px; line-height: 1.8;">
+          위 사람은 JSH HR 포털에서 제공하는<br>
+          <strong style="color: var(--primary-color); font-size: 20px;">「Python 데이터 분석 기초」</strong> 과정을<br>
+          2026년 2월 1일부터 2026년 3월 28일까지<br>
+          성실히 이수하였기에 이 증서를 수여합니다.
+        </p>
+        <p style="margin-bottom: 8px; font-size: 16px;">2026년 3월 28일</p>
+        <p style="font-weight: 600; font-size: 18px;">JSH HR 포털 대표</p>
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+          <p style="font-size: 12px; color: var(--text-secondary);">증서번호: JSH-2026-001234</p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">
+        ※ 실제 수료증에는 디지털 서명과 QR코드가 포함됩니다
+      </p>
+    </div>
+
+    <!-- 안내 사항 -->
+    <div class="card" style="margin-top: 32px; padding: 32px;">
+      <h3 style="margin-bottom: 20px;"><i class="fas fa-info-circle"></i> 수료증 발급 안내</h3>
+      <ul style="color: var(--text-secondary); line-height: 2;">
+        <li>수료 기준: 출석률 80% 이상 + 과제 제출 완료</li>
+        <li>발급 시점: 교육 과정 종료 후 즉시 발급 가능</li>
+        <li>수료증 형식: PDF 파일 (디지털 서명 포함)</li>
+        <li>유효성 검증: QR 코드 스캔으로 실시간 확인 가능</li>
+        <li>재발급: 언제든지 무료로 재다운로드 가능</li>
+        <li>출력: A4 용지에 컬러 출력 권장</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function previewCertificate() {
+      alert('수료증 미리보기를 표시합니다. (예시 기능)');
+    }
+
+    function downloadCertificate() {
+      alert('수료증 PDF를 다운로드합니다. (예시 기능)\n파일명: JSH_수료증_Python데이터분석기초_홍길동.pdf');
+    }
+  </script>
+</body>
+</html>

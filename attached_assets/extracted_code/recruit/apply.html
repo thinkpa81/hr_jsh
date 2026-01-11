@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채용 지원 - 코아시아 HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div class="container" style="margin: 48px auto 80px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="margin-bottom: 32px;"><i class="fas fa-file-alt"></i> 채용 지원서 작성</h1>
+
+      <div class="card" style="padding: 48px;">
+        <form id="apply-form" onsubmit="handleApply(event)">
+          <h3 style="margin-bottom: 24px;">기본 정보</h3>
+          
+          <div class="form-group">
+            <label class="form-label required">이름</label>
+            <input type="text" class="form-input" id="name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">이메일</label>
+            <input type="email" class="form-input" id="email" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">전화번호</label>
+            <input type="tel" class="form-input" id="phone" required>
+          </div>
+
+          <h3 style="margin: 32px 0 24px;">자기소개서</h3>
+          
+          <div class="form-group">
+            <label class="form-label required">자기소개 (최대 2000자)</label>
+            <textarea class="form-textarea" id="cover-letter" rows="10" maxlength="2000" required></textarea>
+            <span class="form-help">현재: <span id="char-count">0</span>/2000자</span>
+          </div>
+
+          <h3 style="margin: 32px 0 24px;">파일 첨부</h3>
+          
+          <div class="form-group">
+            <label class="form-label required">이력서 (PDF, DOC, DOCX, HWP)</label>
+            <input type="file" class="form-input" id="resume" accept=".pdf,.doc,.docx,.hwp" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">포트폴리오 (선택)</label>
+            <input type="file" class="form-input" id="portfolio" accept=".pdf,.zip">
+          </div>
+
+          <div class="form-check" style="margin: 32px 0;">
+            <input type="checkbox" class="form-check-input" id="agree" required>
+            <label class="form-check-label" for="agree">
+              개인정보 수집 및 이용에 동의합니다 (필수)
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <i class="fas fa-paper-plane"></i> 지원서 제출
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    if (!Auth.requireAuth()) {
+      window.location.href = '../login.html';
+    }
+
+    document.getElementById('name').value = Auth.currentUser?.name || '';
+    document.getElementById('email').value = Auth.currentUser?.email || '';
+    document.getElementById('phone').value = Auth.currentUser?.phone || '';
+
+    document.getElementById('cover-letter').addEventListener('input', (e) => {
+      document.getElementById('char-count').textContent = e.target.value.length;
+    });
+
+    async function handleApply(e) {
+      e.preventDefault();
+      
+      const jobId = Utils.getUrlParam('id');
+      if (!jobId) {
+        alert('잘못된 접근입니다.');
+        return;
+      }
+
+      Utils.showLoading();
+
+      try {
+        const resumeFile = document.getElementById('resume').files[0];
+        const portfolioFile = document.getElementById('portfolio').files[0];
+
+        const resumeBase64 = await Utils.fileToBase64(resumeFile);
+        const portfolioBase64 = portfolioFile ? await Utils.fileToBase64(portfolioFile) : '';
+
+        const application = {
+          job_id: jobId,
+          user_id: Auth.currentUser.id,
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          cover_letter: document.getElementById('cover-letter').value,
+          resume_file: resumeBase64,
+          portfolio_file: portfolioBase64,
+          status: '접수완료',
+          created_at: new Date().toISOString()
+        };
+
+        await fetch('tables/applications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(application)
+        });
+
+        Utils.hideLoading();
+        alert('지원이 완료되었습니다!');
+        window.location.href = '../mypage/applications.html';
+      } catch (error) {
+        Utils.hideLoading();
+        alert('지원 중 오류가 발생했습니다.');
+      }
+    }
+  </script>
+</body>
+</html>

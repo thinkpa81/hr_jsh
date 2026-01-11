@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교육과정 안내 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 64px 0; margin-bottom: 48px;">
+    <div class="container">
+      <h1 style="font-size: 40px; margin-bottom: 16px; color: white;">
+        <i class="fas fa-graduation-cap"></i> 교육과정 안내
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9); margin: 0;">
+        JSH의 체계적인 교육 프로그램으로 역량을 강화하세요
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 80px;">
+    <div class="grid grid-3" id="course-list">
+      <div class="card text-center" style="padding: 80px;">
+        <div class="spinner" style="margin: 0 auto 16px;"></div>
+        <p style="color: var(--text-secondary);">교육과정을 불러오는 중...</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>경기도 용인시 수지구 죽전로 152 단국대학교 소프트웨어 ICT관 512호</p>
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    async function loadCourses() {
+      const container = document.getElementById('course-list');
+      
+      try {
+        const response = await fetch('tables/courses?status=active&limit=20');
+        const data = await response.json();
+        
+        if (data.data && data.data.length > 0) {
+          container.innerHTML = data.data.map(course => `
+            <div class="card">
+              <div class="card-body">
+                <span class="badge badge-primary">${course.category}</span>
+                <h3 class="card-title">${course.title}</h3>
+                <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+                  <div style="margin-bottom: 8px;">
+                    <i class="fas fa-calendar"></i> ${Utils.formatDate(course.start_date)} ~ ${Utils.formatDate(course.end_date)}
+                  </div>
+                  <div style="margin-bottom: 8px;">
+                    <i class="fas fa-users"></i> 정원 ${course.capacity}명
+                  </div>
+                  <div>
+                    <i class="fas fa-clock"></i> ${course.hours}시간
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <span>${course.fee === 0 ? '무료' : Utils.formatNumber(course.fee) + '원'}</span>
+                <a href="course-detail.html?id=${course.id}" class="btn btn-primary btn-sm">
+                  상세보기
+                </a>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          container.innerHTML = `
+            <div class="card text-center" style="padding: 80px; grid-column: 1 / -1;">
+              <i class="fas fa-inbox" style="font-size: 64px; color: var(--text-secondary); margin-bottom: 24px;"></i>
+              <h3>현재 진행중인 교육과정이 없습니다</h3>
+              <p style="color: var(--text-secondary);">새로운 교육과정이 곧 공개될 예정입니다.</p>
+            </div>
+          `;
+        }
+      } catch (error) {
+        container.innerHTML = `
+          <div class="alert alert-error" style="grid-column: 1 / -1;">
+            <i class="fas fa-exclamation-circle"></i>
+            교육과정을 불러오는데 실패했습니다.
+          </div>
+        `;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCourses);
+  </script>
+</body>
+</html>

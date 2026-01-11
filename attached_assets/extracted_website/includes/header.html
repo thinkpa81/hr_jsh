@@ -1,0 +1,223 @@
+<header class="header">
+  <div class="header-container">
+    <a href="/" class="logo">
+      <i class="fas fa-brain"></i>
+      <span style="margin-left: 8px;">JSH HR</span>
+    </a>
+    
+    <nav class="nav">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            채용 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-inner dropdown-grid-5">
+              <a href="/recruit/dashboard.html" class="dropdown-item">
+                <i class="fas fa-globe"></i> 채용 대시보드
+              </a>
+              <a href="/recruit/jobs.html" class="dropdown-item">
+                <i class="fas fa-briefcase"></i> 채용공고
+              </a>
+              <a href="/recruit/ongoing.html" class="dropdown-item">
+                <i class="fas fa-clock"></i> 진행중인 채용
+              </a>
+              <a href="/recruit/positions.html" class="dropdown-item">
+                <i class="fas fa-user-tie"></i> 직무소개
+              </a>
+              <a href="/recruit/process.html" class="dropdown-item">
+                <i class="fas fa-sitemap"></i> 채용 프로세스
+              </a>
+              <a href="/recruit/faq.html" class="dropdown-item">
+                <i class="fas fa-question-circle"></i> 채용 FAQ
+              </a>
+              <a href="/recruit/resume-upload.html" class="dropdown-item">
+                <i class="fas fa-cloud-upload-alt"></i> 이력서 업로드
+              </a>
+              <a href="/recruit/applicant-management.html" class="dropdown-item">
+                <i class="fas fa-users-cog"></i> 지원자 관리
+              </a>
+              <a href="/recruit/email-management.html" class="dropdown-item">
+                <i class="fas fa-envelope-open-text"></i> 이메일 관리
+              </a>
+              <a href="/recruit/analytics.html" class="dropdown-item">
+                <i class="fas fa-chart-line"></i> 통계 분석
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="/analytics/dashboard.html" class="nav-link">
+            HR 분석
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            인사제도 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-inner">
+              <a href="/guide/hr-comprehensive.html" class="dropdown-item">
+                <i class="fas fa-book"></i> HR 종합 가이드
+              </a>
+              <a href="/hr/evaluation.html" class="dropdown-item">
+                <i class="fas fa-star"></i> 평가제도
+              </a>
+              <a href="/hr/compensation.html" class="dropdown-item">
+                <i class="fas fa-money-bill-wave"></i> 보상체계
+              </a>
+              <a href="/hr/promotion.html" class="dropdown-item">
+                <i class="fas fa-chart-line"></i> 승진제도
+              </a>
+              <a href="/hr/benefits.html" class="dropdown-item">
+                <i class="fas fa-gift"></i> 복리후생
+              </a>
+              <a href="/hr/culture.html" class="dropdown-item">
+                <i class="fas fa-users"></i> 조직문화
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            교육/개발 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-inner">
+              <a href="/education/courses.html" class="dropdown-item">
+                <i class="fas fa-graduation-cap"></i> 교육과정 안내
+              </a>
+              <a href="/education/enroll.html" class="dropdown-item">
+                <i class="fas fa-edit"></i> 수강신청
+              </a>
+              <a href="/mypage/learning.html" class="dropdown-item">
+                <i class="fas fa-history"></i> 나의 학습이력
+              </a>
+              <a href="/education/materials.html" class="dropdown-item">
+                <i class="fas fa-folder-open"></i> 교육자료실
+              </a>
+              <a href="/education/certificate.html" class="dropdown-item">
+                <i class="fas fa-certificate"></i> 수료증 발급
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="/notice/list.html" class="nav-link">
+            공지사항
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            고객지원 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-menu-inner">
+              <a href="/support/faq.html" class="dropdown-item">
+                <i class="fas fa-question-circle"></i> FAQ
+              </a>
+              <a href="/support/inquiry.html" class="dropdown-item">
+                <i class="fas fa-comments"></i> 1:1 문의
+              </a>
+              <a href="/support/archive.html" class="dropdown-item">
+                <i class="fas fa-archive"></i> 자료실
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    
+    <div class="header-actions">
+      <button class="icon-btn" style="display: none;" title="검색">
+        <i class="fas fa-search"></i>
+      </button>
+      <button class="icon-btn" style="display: none;" title="알림">
+        <i class="fas fa-bell"></i>
+      </button>
+      <a href="/login.html" class="btn btn-primary btn-sm">로그인</a>
+    </div>
+    
+    <button class="mobile-menu-toggle" aria-label="메뉴 열기">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</header>
+
+<script>
+  // Dropdown menu functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const navItems = document.querySelectorAll('.nav-item');
+    let currentActiveItem = null;
+    
+    navItems.forEach(item => {
+      const link = item.querySelector('.nav-link');
+      const dropdownMenu = item.querySelector('.dropdown-menu');
+      
+      if (link && dropdownMenu) {
+        // Click to toggle dropdown
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // If clicking the same item, toggle it
+          if (currentActiveItem === item) {
+            item.classList.toggle('active');
+            if (!item.classList.contains('active')) {
+              currentActiveItem = null;
+            }
+          } else {
+            // Close all other dropdowns
+            navItems.forEach(otherItem => {
+              if (otherItem !== item) {
+                otherItem.classList.remove('active');
+              }
+            });
+            
+            // Open this dropdown
+            item.classList.add('active');
+            currentActiveItem = item;
+          }
+        });
+        
+        // Hover effect (visual only, doesn't open)
+        item.addEventListener('mouseenter', () => {
+          if (currentActiveItem !== item) {
+            item.classList.add('active');
+          }
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          if (currentActiveItem !== item) {
+            item.classList.remove('active');
+          }
+        });
+      }
+    });
+    
+    // Close dropdowns when clicking outside (but not inside dropdown menu)
+    document.addEventListener('click', (e) => {
+      // Don't close if clicking inside dropdown menu
+      if (e.target.closest('.dropdown-menu')) {
+        return;
+      }
+      
+      // Close if clicking outside nav area
+      if (!e.target.closest('.nav-item')) {
+        navItems.forEach(item => {
+          item.classList.remove('active');
+        });
+        currentActiveItem = null;
+      }
+    });
+    
+    // Close dropdowns with ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        navItems.forEach(item => {
+          item.classList.remove('active');
+        });
+        currentActiveItem = null;
+      }
+    });
+  });
+</script>

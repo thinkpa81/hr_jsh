@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>지원자 관리 - JSH HR 포털</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🏢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Include Header -->
+  <div id="header-placeholder"></div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1><i class="fas fa-users-cog"></i> 지원자 관리</h1>
+      <p>채용 지원자를 효율적으로 관리하고 진행 상황을 추적하세요</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Statistics Overview -->
+      <div class="stats-grid" style="margin-bottom: 32px;">
+        <div class="stat-card stat-blue">
+          <div class="stat-icon">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">총 지원자</div>
+            <div class="stat-value">124</div>
+          </div>
+        </div>
+        <div class="stat-card stat-green">
+          <div class="stat-icon">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">서류 합격</div>
+            <div class="stat-value">48</div>
+          </div>
+        </div>
+        <div class="stat-card stat-purple">
+          <div class="stat-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">면접 예정</div>
+            <div class="stat-value">26</div>
+          </div>
+        </div>
+        <div class="stat-card stat-orange">
+          <div class="stat-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">최종 합격</div>
+            <div class="stat-value">12</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Section -->
+      <div class="dashboard-section" style="margin-bottom: 24px;">
+        <div class="filter-group" style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <input type="text" class="form-input" placeholder="이름 또는 이메일 검색" style="flex: 1; min-width: 250px;">
+          <select class="form-input" style="width: 150px;">
+            <option value="">전체 포지션</option>
+            <option value="backend">백엔드 개발자</option>
+            <option value="frontend">프론트엔드 개발자</option>
+            <option value="data">데이터 사이언티스트</option>
+            <option value="hr">HR 매니저</option>
+          </select>
+          <select class="form-input" style="width: 150px;">
+            <option value="">전체 상태</option>
+            <option value="document">서류 전형</option>
+            <option value="interview1">1차 면접</option>
+            <option value="interview2">2차 면접</option>
+            <option value="final">최종 합격</option>
+            <option value="rejected">불합격</option>
+          </select>
+          <select class="form-input" style="width: 150px;">
+            <option value="">AI 점수순</option>
+            <option value="desc">높은 순</option>
+            <option value="asc">낮은 순</option>
+          </select>
+          <button class="btn btn-primary">
+            <i class="fas fa-search"></i> 검색
+          </button>
+        </div>
+      </div>
+
+      <!-- Applicant List -->
+      <div class="dashboard-section">
+        <div class="section-header" style="margin-bottom: 24px;">
+          <h2 class="section-title">
+            <div class="section-icon" style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);">
+              <i class="fas fa-list"></i>
+            </div>
+            지원자 목록 <span style="color: var(--primary-color);">(124명)</span>
+          </h2>
+          <div style="display: flex; gap: 12px;">
+            <button class="btn btn-outline btn-sm" onclick="exportExcel()">
+              <i class="fas fa-file-excel"></i> 엑셀 다운로드
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="sendBulkEmail()">
+              <i class="fas fa-envelope"></i> 일괄 메일 발송
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 40px;">
+                  <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+                </th>
+                <th>지원자</th>
+                <th>포지션</th>
+                <th>경력</th>
+                <th>AI 점수</th>
+                <th>상태</th>
+                <th>지원일</th>
+                <th>작업</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td>
+                  <div class="applicant-info">
+                    <div class="applicant-avatar">이</div>
+                    <div>
+                      <div class="applicant-name">이순신</div>
+                      <div class="applicant-email">lee.sunsin@email.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td>백엔드 개발자 (Node.js)</td>
+                <td>5년</td>
+                <td>
+                  <div class="ai-score-badge score-high">
+                    <i class="fas fa-robot"></i> 92점
+                  </div>
+                </td>
+                <td><span class="status-badge status-interview">1차 면접</span></td>
+                <td>2026-01-08</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="상세보기" onclick="viewDetail(1)">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn-icon" title="이메일" onclick="sendEmail(1)">
+                      <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="btn-icon" title="메모" onclick="addNote(1)">
+                      <i class="fas fa-sticky-note"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td>
+                  <div class="applicant-info">
+                    <div class="applicant-avatar">김</div>
+                    <div>
+                      <div class="applicant-name">김유신</div>
+                      <div class="applicant-email">kim.yusin@email.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td>데이터 사이언티스트</td>
+                <td>3년</td>
+                <td>
+                  <div class="ai-score-badge score-high">
+                    <i class="fas fa-robot"></i> 88점
+                  </div>
+                </td>
+                <td><span class="status-badge status-document">서류 전형</span></td>
+                <td>2026-01-09</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="상세보기" onclick="viewDetail(2)">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn-icon" title="이메일" onclick="sendEmail(2)">
+                      <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="btn-icon" title="메모" onclick="addNote(2)">
+                      <i class="fas fa-sticky-note"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td>
+                  <div class="applicant-info">
+                    <div class="applicant-avatar">강</div>
+                    <div>
+                      <div class="applicant-name">강감찬</div>
+                      <div class="applicant-email">kang.kamchan@email.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td>HR 매니저</td>
+                <td>7년</td>
+                <td>
+                  <div class="ai-score-badge score-medium">
+                    <i class="fas fa-robot"></i> 75점
+                  </div>
+                </td>
+                <td><span class="status-badge status-interview2">2차 면접</span></td>
+                <td>2026-01-05</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="상세보기" onclick="viewDetail(3)">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn-icon" title="이메일" onclick="sendEmail(3)">
+                      <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="btn-icon" title="메모" onclick="addNote(3)">
+                      <i class="fas fa-sticky-note"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td>
+                  <div class="applicant-info">
+                    <div class="applicant-avatar">박</div>
+                    <div>
+                      <div class="applicant-name">박지성</div>
+                      <div class="applicant-email">park.jisung@email.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td>프론트엔드 개발자</td>
+                <td>2년</td>
+                <td>
+                  <div class="ai-score-badge score-high">
+                    <i class="fas fa-robot"></i> 85점
+                  </div>
+                </td>
+                <td><span class="status-badge status-final">최종 합격</span></td>
+                <td>2026-01-03</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="상세보기" onclick="viewDetail(4)">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn-icon" title="이메일" onclick="sendEmail(4)">
+                      <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="btn-icon" title="메모" onclick="addNote(4)">
+                      <i class="fas fa-sticky-note"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td>
+                  <div class="applicant-info">
+                    <div class="applicant-avatar">최</div>
+                    <div>
+                      <div class="applicant-name">최영</div>
+                      <div class="applicant-email">choi.young@email.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td>경영기획 담당자</td>
+                <td>신입</td>
+                <td>
+                  <div class="ai-score-badge score-medium">
+                    <i class="fas fa-robot"></i> 72점
+                  </div>
+                </td>
+                <td><span class="status-badge status-document">서류 전형</span></td>
+                <td>2026-01-10</td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-icon" title="상세보기" onclick="viewDetail(5)">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn-icon" title="이메일" onclick="sendEmail(5)">
+                      <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="btn-icon" title="메모" onclick="addNote(5)">
+                      <i class="fas fa-sticky-note"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" style="margin-top: 24px;">
+          <button class="btn btn-outline btn-sm"><i class="fas fa-chevron-left"></i></button>
+          <button class="btn btn-primary btn-sm">1</button>
+          <button class="btn btn-outline btn-sm">2</button>
+          <button class="btn btn-outline btn-sm">3</button>
+          <button class="btn btn-outline btn-sm">4</button>
+          <button class="btn btn-outline btn-sm">5</button>
+          <button class="btn btn-outline btn-sm"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 JSH HR Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Load header
+    fetch('../includes/header.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+      });
+
+    function toggleSelectAll() {
+      const selectAll = document.getElementById('selectAll');
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAll.checked;
+      });
+    }
+
+    function exportExcel() {
+      alert('엑셀 파일을 다운로드합니다.');
+    }
+
+    function sendBulkEmail() {
+      const checked = document.querySelectorAll('.row-checkbox:checked');
+      if (checked.length === 0) {
+        alert('이메일을 발송할 지원자를 선택해주세요.');
+        return;
+      }
+      alert(`선택된 ${checked.length}명에게 이메일을 발송합니다.`);
+    }
+
+    function viewDetail(id) {
+      alert(`지원자 ID ${id}의 상세 정보를 확인합니다.`);
+      window.location.href = `applicant-detail.html?id=${id}`;
+    }
+
+    function sendEmail(id) {
+      alert(`지원자 ID ${id}에게 이메일을 발송합니다.`);
+    }
+
+    function addNote(id) {
+      const note = prompt('메모를 입력하세요:');
+      if (note) {
+        alert(`지원자 ID ${id}에 메모가 추가되었습니다: "${note}"`);
+      }
+    }
+  </script>
+
+  <style>
+    .applicant-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .applicant-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-color) 0%, #2563EB 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .applicant-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .applicant-email {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .ai-score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .score-high {
+      background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+      color: #059669;
+    }
+
+    .score-medium {
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      color: #D97706;
+    }
+
+    .score-low {
+      background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+      color: #DC2626;
+    }
+
+    .status-interview {
+      background: #DBEAFE;
+      color: #2563EB;
+    }
+
+    .status-interview2 {
+      background: #E0E7FF;
+      color: #6366F1;
+    }
+
+    .status-document {
+      background: #FEF3C7;
+      color: #D97706;
+    }
+
+    .status-final {
+      background: #D1FAE5;
+      color: #059669;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 - 코아시아 HR 포털</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <style>
+    .login-container {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      background: linear-gradient(135deg, #E8F1F8 0%, #F7F9FC 100%);
+    }
+    
+    .login-box {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      padding: 48px;
+      width: 100%;
+      max-width: 480px;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    
+    .login-header h1 {
+      font-size: 28px;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+    
+    .login-header p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    .social-login {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      border: 1px solid var(--border-color);
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .social-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .social-btn.google {
+      border-color: #4285F4;
+      color: #4285F4;
+    }
+    
+    .social-btn.naver {
+      border-color: #03C75A;
+      color: #03C75A;
+    }
+    
+    .social-btn.kakao {
+      border-color: #FEE500;
+      background: #FEE500;
+      color: #000000;
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 24px 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .divider span {
+      padding: 0 16px;
+    }
+    
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    
+    .remember-forgot a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    .remember-forgot a:hover {
+      text-decoration: underline;
+    }
+    
+    .signup-link {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .signup-link a {
+      color: var(--primary-color);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 767px) {
+      .login-box {
+        padding: 32px 24px;
+      }
+      
+      .login-header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Simple Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-building"></i>
+        <span style="margin-left: 8px;">COASIA HR</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Login Container -->
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <h1>
+          <i class="fas fa-sign-in-alt"></i>
+          로그인
+        </h1>
+        <p>코아시아 HR 포털에 오신 것을 환영합니다</p>
+      </div>
+      
+      <!-- Social Login (Phase 2 예정) -->
+      <div class="social-login">
+        <button class="social-btn google" onclick="alert('소셜 로그인은 Phase 2에서 구현 예정입니다.')">
+          <i class="fab fa-google"></i>
+          구글로 로그인
+        </button>
+        <button class="social-btn naver" onclick="alert('소셜 로그인은 Phase 2에서 구현 예정입니다.')">
+          <i class="fas fa-n" style="font-weight: bold;"></i>
+          네이버로 로그인
+        </button>
+        <button class="social-btn kakao" onclick="alert('소셜 로그인은 Phase 2에서 구현 예정입니다.')">
+          <i class="fas fa-comment"></i>
+          카카오로 로그인
+        </button>
+      </div>
+      
+      <div class="divider">
+        <span>또는 이메일로 로그인</span>
+      </div>
+      
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label required">이메일</label>
+          <input 
+            type="email" 
+            class="form-input" 
+            id="email" 
+            name="email"
+            placeholder="example@coasia.com"
+            required
+            autocomplete="email"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label required">비밀번호</label>
+          <input 
+            type="password" 
+            class="form-input" 
+            id="password" 
+            name="password"
+            placeholder="비밀번호를 입력하세요"
+            required
+            autocomplete="current-password"
+          >
+        </div>
+        
+        <div class="remember-forgot">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+            <label class="form-check-label" for="remember">
+              자동 로그인 (30일)
+            </label>
+          </div>
+          <a href="find-password.html">비밀번호 찾기</a>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 24px;">
+          <i class="fas fa-sign-in-alt"></i>
+          로그인
+        </button>
+      </form>
+      
+      <div class="signup-link">
+        아직 회원이 아니신가요?
+        <a href="signup.html">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    // 이미 로그인된 경우 리다이렉트
+    if (Auth.isLoggedIn()) {
+      const redirect = Utils.getUrlParam('redirect') || '/';
+      window.location.href = redirect;
+    }
+    
+    // 로그인 처리
+    async function handleLogin(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const remember = document.getElementById('remember').checked;
+      
+      // 유효성 검사
+      if (!Utils.validateEmail(email)) {
+        Utils.showAlert('올바른 이메일 형식이 아닙니다.', 'error');
+        return;
+      }
+      
+      if (password.length < 8) {
+        Utils.showAlert('비밀번호는 8자 이상이어야 합니다.', 'error');
+        return;
+      }
+      
+      // 로딩 표시
+      Utils.showLoading();
+      
+      try {
+        // 로그인 시도
+        await Auth.login(email, password);
+        
+        Utils.hideLoading();
+        Utils.showAlert('로그인 성공!', 'success');
+        
+        // 리다이렉트
+        setTimeout(() => {
+          const redirect = Utils.getUrlParam('redirect') || '/';
+          window.location.href = redirect;
+        }, 1000);
+      } catch (error) {
+        Utils.hideLoading();
+        Utils.showAlert(error.message || '로그인에 실패했습니다.', 'error');
+      }
+    }
+    
+    // Enter 키로 로그인
+    document.getElementById('password').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('login-form').dispatchEvent(new Event('submit'));
+      }
+    });
+  </script>
+</body>
+</html>

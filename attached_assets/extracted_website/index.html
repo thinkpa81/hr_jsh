@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JSH HR 통합 포털 - AI 기반 채용, 인사제도, 교육, 데이터 분석">
+  <meta name="keywords" content="JSH, HR, 채용, 인사, 교육, AI, 데이터분석">
+  <title>JSH HR 통합 포털</title>
+  
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-brain"></i>
+        <span style="margin-left: 8px;">JSH HR</span>
+      </a>
+      
+      <nav class="nav">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              채용 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner dropdown-grid-5">
+                <a href="recruit/dashboard.html" class="dropdown-item">
+                  <i class="fas fa-globe"></i> 채용 대시보드
+                </a>
+                <a href="recruit/jobs.html" class="dropdown-item">
+                  <i class="fas fa-briefcase"></i> 채용공고
+                </a>
+                <a href="recruit/ongoing.html" class="dropdown-item">
+                  <i class="fas fa-clock"></i> 진행중인 채용
+                </a>
+                <a href="recruit/positions.html" class="dropdown-item">
+                  <i class="fas fa-user-tie"></i> 직무소개
+                </a>
+                <a href="recruit/process.html" class="dropdown-item">
+                  <i class="fas fa-sitemap"></i> 채용 프로세스
+                </a>
+                <a href="recruit/faq.html" class="dropdown-item">
+                  <i class="fas fa-question-circle"></i> 채용 FAQ
+                </a>
+                <a href="recruit/resume-upload.html" class="dropdown-item">
+                  <i class="fas fa-cloud-upload-alt"></i> 이력서 업로드
+                </a>
+                <a href="recruit/applicant-management.html" class="dropdown-item">
+                  <i class="fas fa-users-cog"></i> 지원자 관리
+                </a>
+                <a href="recruit/email-management.html" class="dropdown-item">
+                  <i class="fas fa-envelope-open-text"></i> 이메일 관리
+                </a>
+                <a href="recruit/analytics.html" class="dropdown-item">
+                  <i class="fas fa-chart-line"></i> 통계 분석
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="analytics/dashboard.html" class="nav-link">
+              HR 분석
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              인사제도 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner">
+                <a href="guide/hr-comprehensive.html" class="dropdown-item">
+                  <i class="fas fa-book"></i> HR 종합 가이드
+                </a>
+                <a href="hr/evaluation.html" class="dropdown-item">
+                  <i class="fas fa-star"></i> 평가제도
+                </a>
+                <a href="hr/compensation.html" class="dropdown-item">
+                  <i class="fas fa-money-bill-wave"></i> 보상체계
+                </a>
+                <a href="hr/promotion.html" class="dropdown-item">
+                  <i class="fas fa-chart-line"></i> 승진제도
+                </a>
+                <a href="hr/benefits.html" class="dropdown-item">
+                  <i class="fas fa-gift"></i> 복리후생
+                </a>
+                <a href="hr/culture.html" class="dropdown-item">
+                  <i class="fas fa-users"></i> 조직문화
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              교육/개발 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner">
+                <a href="education/courses.html" class="dropdown-item">
+                  <i class="fas fa-graduation-cap"></i> 교육과정 안내
+                </a>
+                <a href="education/enroll.html" class="dropdown-item">
+                  <i class="fas fa-book-reader"></i> 수강신청
+                </a>
+                <a href="mypage/learning.html" class="dropdown-item">
+                  <i class="fas fa-history"></i> 나의 학습이력
+                </a>
+                <a href="education/materials.html" class="dropdown-item">
+                  <i class="fas fa-folder-open"></i> 교육자료실
+                </a>
+                <a href="education/certificate.html" class="dropdown-item">
+                  <i class="fas fa-certificate"></i> 수료증 발급
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="notice/list.html" class="nav-link">공지사항</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              고객지원 <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-inner">
+                <a href="support/faq.html" class="dropdown-item">
+                  <i class="fas fa-question-circle"></i> FAQ
+                </a>
+                <a href="support/inquiry.html" class="dropdown-item">
+                  <i class="fas fa-comment-dots"></i> 1:1 문의
+                </a>
+                <a href="support/archive.html" class="dropdown-item">
+                  <i class="fas fa-archive"></i> 자료실
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <button class="icon-btn" id="search-btn" title="통합검색">
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="icon-btn" id="notification-btn" title="알림" style="display: none;">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
+        </button>
+        
+        <a href="login.html" class="btn btn-primary btn-sm" id="login-btn">
+          <i class="fas fa-sign-in-alt"></i>
+          로그인
+        </a>
+        
+        <div class="user-menu" id="user-menu" style="display: none;">
+          <button class="user-button" onclick="toggleUserDropdown()">
+            <div class="user-avatar" id="user-avatar">장</div>
+            <span id="user-name">장순호</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+          </button>
+          <ul class="dropdown-menu" id="user-dropdown" style="right: 0; left: auto;">
+            <li><a href="mypage/dashboard.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> 내 대시보드</a></li>
+            <li><a href="mypage/applications.html" class="dropdown-item"><i class="fas fa-file-alt"></i> 나의 지원내역</a></li>
+            <li><a href="admin/dashboard.html" class="dropdown-item"><i class="fas fa-shield-alt"></i> 관리자 페이지</a></li>
+            <li><hr style="margin: 8px 0; border: 0; border-top: 1px solid var(--border-color);"></li>
+            <li><a href="#" class="dropdown-item" onclick="Auth.logout(); return false;"><i class="fas fa-sign-out-alt"></i> 로그아웃</a></li>
+          </ul>
+        </div>
+        
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero" style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 100px 0; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 52px; font-weight: 700; margin-bottom: 24px; color: white;">
+        함께 성장하는 JSH
+      </h1>
+      <p style="font-size: 22px; margin-bottom: 48px; color: rgba(255,255,255,0.95);">
+        데이터 분석, HR 대시보드, AI 혁신 기술로 미래를 만들어갑니다
+      </p>
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="analytics/dashboard.html" class="btn btn-accent btn-lg">
+          <i class="fas fa-chart-line"></i>
+          데이터 분석
+        </a>
+        <a href="recruit/jobs.html" class="btn btn-secondary btn-lg" style="background-color: white; color: #0052A5;">
+          <i class="fas fa-briefcase"></i>
+          채용공고 보기
+        </a>
+        <a href="guide/hr-comprehensive.html" class="btn btn-secondary btn-lg" style="background-color: rgba(255,255,255,0.2); color: white; border: 2px solid white;">
+          <i class="fas fa-book"></i>
+          HR 가이드
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats -->
+  <section class="section" style="padding: 64px 0; background-color: var(--surface-color);">
+    <div class="container">
+      <div class="grid grid-4">
+        <div class="card text-center" style="padding: 40px;">
+          <div style="font-size: 56px; color: var(--primary-color); margin-bottom: 20px;">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 style="font-size: 36px; font-weight: 700; color: var(--primary-color); margin-bottom: 8px;">1,200+</h3>
+          <p style="color: var(--text-secondary); margin: 0; font-size: 16px;">전체 임직원</p>
+          <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">(예시)</p>
+        </div>
+        <div class="card text-center" style="padding: 40px;">
+          <div style="font-size: 56px; color: var(--accent-color); margin-bottom: 20px;">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3 style="font-size: 36px; font-weight: 700; color: var(--accent-color); margin-bottom: 8px;" id="active-jobs-count">5</h3>
+          <p style="color: var(--text-secondary); margin: 0; font-size: 16px;">진행중인 채용</p>
+          <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">(예시)</p>
+        </div>
+        <div class="card text-center" style="padding: 40px;">
+          <div style="font-size: 56px; color: var(--success-color); margin-bottom: 20px;">
+            <i class="fas fa-robot"></i>
+          </div>
+          <h3 style="font-size: 36px; font-weight: 700; color: var(--success-color); margin-bottom: 8px;">95%</h3>
+          <p style="color: var(--text-secondary); margin: 0; font-size: 16px;">AI 채용 정확도</p>
+          <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">(예시)</p>
+        </div>
+        <div class="card text-center" style="padding: 40px;">
+          <div style="font-size: 56px; color: var(--info-color); margin-bottom: 20px;">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 style="font-size: 36px; font-weight: 700; color: var(--info-color); margin-bottom: 8px;">87%</h3>
+          <p style="color: var(--text-secondary); margin: 0; font-size: 16px;">직원 만족도</p>
+          <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">(예시)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Jobs -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>주요 채용공고</h2>
+        <p>JSH의 최신 채용 정보를 확인하세요 <span style="font-size: 14px; color: #999;">(예시)</span></p>
+      </div>
+      
+      <div class="grid grid-3" id="featured-jobs">
+        <div class="card">
+          <div style="text-align: center; padding: 60px 20px;">
+            <div class="spinner" style="margin: 0 auto 16px;"></div>
+            <p style="color: var(--text-secondary);">채용공고를 불러오는 중...</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center" style="margin-top: 40px;">
+        <a href="recruit/jobs.html" class="btn btn-outline btn-lg">
+          <i class="fas fa-list"></i>
+          모든 채용공고 보기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HR System Features -->
+  <section class="section" style="background-color: var(--surface-color);">
+    <div class="container">
+      <div class="section-title">
+        <h2>JSH HR 시스템 특징</h2>
+        <p>AI 기반 데이터 분석으로 최적의 HR 솔루션을 제공합니다</p>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="card text-center" style="padding: 40px;">
+          <div style="width: 90px; height: 90px; border-radius: 50%; background-color: var(--primary-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <i class="fas fa-chart-bar" style="font-size: 40px; color: var(--primary-color);"></i>
+          </div>
+          <h3 style="font-size: 22px; margin-bottom: 16px;">데이터 분석</h3>
+          <p style="color: var(--text-secondary); margin: 0; line-height: 1.7;">
+            HR Analytics와 People Analytics로 데이터 기반 의사결정 지원
+          </p>
+        </div>
+        
+        <div class="card text-center" style="padding: 40px;">
+          <div style="width: 90px; height: 90px; border-radius: 50%; background-color: var(--accent-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <i class="fas fa-tachometer-alt" style="font-size: 40px; color: var(--accent-color);"></i>
+          </div>
+          <h3 style="font-size: 22px; margin-bottom: 16px;">HR 대시보드</h3>
+          <p style="color: var(--text-secondary); margin: 0; line-height: 1.7;">
+            실시간 채용, 평가, 교육 현황을 한눈에 확인
+          </p>
+        </div>
+        
+        <div class="card text-center" style="padding: 40px;">
+          <div style="width: 90px; height: 90px; border-radius: 50%; background-color: #E8F5E9; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <i class="fas fa-robot" style="font-size: 40px; color: var(--success-color);"></i>
+          </div>
+          <h3 style="font-size: 22px; margin-bottom: 16px;">AI 혁신 기술</h3>
+          <p style="color: var(--text-secondary); margin: 0; line-height: 1.7;">
+            AI 면접, 예측 분석, 자동화로 효율성 극대화
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 48px;">
+        <a href="analytics/dashboard.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-chart-line"></i>
+          데이터 분석 대시보드 보기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HR Guide -->
+  <section class="section">
+    <div class="container">
+      <div style="background: linear-gradient(135deg, #E8F1F8 0%, #F7F9FC 100%); border-radius: 16px; padding: 64px; text-align: center;">
+        <h2 style="font-size: 32px; margin-bottom: 20px;">인사관리(HR) 전체 영역 종합 가이드</h2>
+        <p style="font-size: 18px; color: var(--text-secondary); margin-bottom: 40px;">
+          HRM, HRD, 채용, 평가, 보상, 교육, 노사관계, HR Analytics까지<br>
+          모든 HR 영역을 체계적으로 정리한 완전 가이드
+        </p>
+        <a href="guide/hr-comprehensive.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-book-open"></i>
+          HR 가이드 보기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section" style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; text-align: center;">
+    <div class="container">
+      <h2 style="font-size: 40px; font-weight: 700; margin-bottom: 20px; color: white;">
+        지금 바로 시작하세요
+      </h2>
+      <p style="font-size: 20px; margin-bottom: 40px; color: rgba(255,255,255,0.95);">
+        JSH와 함께 HR 혁신을 경험하세요
+      </p>
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="analytics/dashboard.html" class="btn btn-accent btn-lg">
+          <i class="fas fa-chart-line"></i>
+          데이터 분석
+        </a>
+        <a href="recruit/jobs.html" class="btn btn-secondary btn-lg" style="background-color: white; color: #0052A5;">
+          <i class="fas fa-briefcase"></i>
+          채용공고 보기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>JSH 그룹</h4>
+          <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6;">
+            AI 기반 HR 혁신으로<br>
+            미래 인재관리를 선도합니다.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-link" title="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h4>HR 시스템</h4>
+          <ul class="footer-links">
+            <li><a href="analytics/dashboard.html">데이터 분석</a></li>
+            <li><a href="analytics/dashboard.html">HR 대시보드</a></li>
+            <li><a href="analytics/dashboard.html">AI HR 통계</a></li>
+            <li><a href="guide/hr-comprehensive.html">HR 가이드</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>채용정보</h4>
+          <ul class="footer-links">
+            <li><a href="recruit/jobs.html">채용공고</a></li>
+            <li><a href="recruit/positions.html">직무소개</a></li>
+            <li><a href="recruit/faq.html">채용 FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>고객지원</h4>
+          <ul class="footer-links">
+            <li><a href="support/faq.html">FAQ</a></li>
+            <li><a href="support/inquiry.html">1:1 문의</a></li>
+          </ul>
+          <div style="margin-top: 20px;">
+            <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
+              <i class="fas fa-phone"></i> 031-8005-3500<br>
+              <i class="fas fa-envelope"></i> hr@jsh.com
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>경기도 용인시 수지구 죽전로 152 단국대학교 소프트웨어 ICT관 512호</p>
+        <p>단국대학교 데이터지식서비스공학과 | Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Tab Bar -->
+  <div class="mobile-tab-bar">
+    <a href="/" class="tab-item active">
+      <i class="fas fa-home"></i>
+      <span>홈</span>
+    </a>
+    <a href="recruit/jobs.html" class="tab-item">
+      <i class="fas fa-briefcase"></i>
+      <span>채용</span>
+    </a>
+    <a href="analytics/dashboard.html" class="tab-item">
+      <i class="fas fa-chart-bar"></i>
+      <span>분석</span>
+    </a>
+    <a href="mypage/dashboard.html" class="tab-item">
+      <i class="fas fa-user"></i>
+      <span>마이</span>
+    </a>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Scroll effect for header
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // Navigation mega menu toggle - Enhanced
+    document.addEventListener('DOMContentLoaded', () => {
+      const navItems = document.querySelectorAll('.nav-item');
+      let currentActiveItem = null;
+      
+      navItems.forEach(item => {
+        const navLink = item.querySelector('.nav-link');
+        const dropdown = item.querySelector('.dropdown-menu');
+        
+        if (dropdown && navLink) {
+          // Click to toggle
+          navLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // If clicking the same item, just toggle it
+            if (currentActiveItem === item) {
+              item.classList.toggle('active');
+              if (!item.classList.contains('active')) {
+                currentActiveItem = null;
+              }
+            } else {
+              // Close all other dropdowns
+              navItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('active');
+                }
+              });
+              
+              // Open current dropdown
+              item.classList.add('active');
+              currentActiveItem = item;
+            }
+          });
+          
+          // Hover to preview (optional - can be removed if you want click-only)
+          item.addEventListener('mouseenter', () => {
+            if (!currentActiveItem) {
+              item.classList.add('active');
+            }
+          });
+          
+          item.addEventListener('mouseleave', () => {
+            if (currentActiveItem !== item) {
+              item.classList.remove('active');
+            }
+          });
+        }
+      });
+      
+      // Close dropdowns when clicking outside (but not inside dropdown menu)
+      document.addEventListener('click', (e) => {
+        // Don't close if clicking inside dropdown menu
+        if (e.target.closest('.dropdown-menu')) {
+          return;
+        }
+        
+        // Close if clicking outside nav area
+        if (!e.target.closest('.nav-item')) {
+          navItems.forEach(item => {
+            item.classList.remove('active');
+          });
+          currentActiveItem = null;
+        }
+      });
+      
+      // Close dropdowns with ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          navItems.forEach(item => {
+            item.classList.remove('active');
+          });
+          currentActiveItem = null;
+        }
+      });
+      
+      // Keep dropdown open when clicking dropdown items (removed auto-close)
+      // Users can click outside or press ESC to close
+    });
+    
+    function toggleUserDropdown() {
+      const dropdown = document.getElementById('user-dropdown');
+      const isVisible = dropdown.style.visibility === 'visible';
+      dropdown.style.opacity = isVisible ? '0' : '1';
+      dropdown.style.visibility = isVisible ? 'hidden' : 'visible';
+      dropdown.style.transform = isVisible ? 'translateY(-10px)' : 'translateY(0px)';
+    }
+    
+    document.addEventListener('click', (e) => {
+      const userMenu = document.querySelector('.user-menu');
+      const dropdown = document.getElementById('user-dropdown');
+      if (userMenu && dropdown && !userMenu.contains(e.target)) {
+        dropdown.style.opacity = '0';
+        dropdown.style.visibility = 'hidden';
+        dropdown.style.transform = 'translateY(-10px)';
+      }
+    });
+    
+    async function loadFeaturedJobs() {
+      const container = document.getElementById('featured-jobs');
+      
+      try {
+        const response = await fetch('tables/jobs?status=active&limit=3&sort=-created_at');
+        const data = await response.json();
+        
+        if (data.data && data.data.length > 0) {
+          container.innerHTML = data.data.map(job => {
+            const dday = Utils.getDDay(job.deadline);
+            const ddayClass = dday === '마감' ? 'error' : 'warning';
+            
+            return `
+              <div class="card">
+                <div class="card-body">
+                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                    <span class="badge badge-primary">${job.department || '부문'}</span>
+                    <span class="badge badge-${ddayClass}">${dday}</span>
+                  </div>
+                  <h3 class="card-title">${job.title}</h3>
+                  <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+                    <div style="margin-bottom: 8px;">
+                      <i class="fas fa-map-marker-alt" style="width: 20px;"></i> ${job.location || '미정'}
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                      <i class="fas fa-briefcase" style="width: 20px;"></i> ${job.employment_type} · ${job.experience}
+                    </div>
+                    <div>
+                      <i class="fas fa-calendar" style="width: 20px;"></i> ~ ${Utils.formatDate(job.deadline)}
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button class="icon-btn" onclick="toggleBookmark('${job.id}')" title="관심공고">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <a href="recruit/job-detail.html?id=${job.id}" class="btn btn-primary btn-sm">
+                    상세보기
+                  </a>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      } catch (error) {
+        console.error('Failed to load jobs:', error);
+      }
+    }
+    
+    async function toggleBookmark(jobId) {
+      if (!Auth.isLoggedIn()) {
+        alert('로그인이 필요합니다.');
+        window.location.href = '/login.html';
+        return;
+      }
+      
+      try {
+        const checkResponse = await fetch(`tables/bookmarks?user_id=${Auth.currentUser.id}&job_id=${jobId}`);
+        const checkData = await checkResponse.json();
+        
+        if (checkData.data && checkData.data.length > 0) {
+          await fetch(`tables/bookmarks/${checkData.data[0].id}`, { method: 'DELETE' });
+          Utils.showAlert('관심공고에서 삭제되었습니다.', 'success');
+        } else {
+          await fetch('tables/bookmarks', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              user_id: Auth.currentUser.id,
+              job_id: jobId,
+              created_at: new Date().toISOString()
+            })
+          });
+          Utils.showAlert('관심공고에 추가되었습니다.', 'success');
+        }
+      } catch (error) {
+        console.error('Failed to toggle bookmark:', error);
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFeaturedJobs();
+    });
+  </script>
+</body>
+</html>

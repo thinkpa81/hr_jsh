@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR 데이터 분석 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div class="container" style="margin: 48px auto 80px;">
+    <h1 style="margin-bottom: 32px;"><i class="fas fa-chart-bar"></i> HR 데이터 분석 대시보드</h1>
+
+    <!-- AI HR 통계 -->
+    <div class="grid grid-4" style="margin-bottom: 48px;">
+      <div class="card text-center" style="padding: 32px;">
+        <i class="fas fa-robot" style="font-size: 48px; color: var(--primary-color); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 28px; color: var(--primary-color);">95%</h3>
+        <p style="color: var(--text-secondary);">AI 채용 정확도</p>
+      </div>
+      <div class="card text-center" style="padding: 32px;">
+        <i class="fas fa-users-cog" style="font-size: 48px; color: var(--success-color); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 28px; color: var(--success-color);">1,200+</h3>
+        <p style="color: var(--text-secondary);">관리 인원</p>
+      </div>
+      <div class="card text-center" style="padding: 32px;">
+        <i class="fas fa-brain" style="font-size: 48px; color: var(--accent-color); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 28px; color: var(--accent-color);">87%</h3>
+        <p style="color: var(--text-secondary);">직원 만족도</p>
+      </div>
+      <div class="card text-center" style="padding: 32px;">
+        <i class="fas fa-chart-line" style="font-size: 48px; color: var(--info-color); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 28px; color: var(--info-color);">3.2%</h3>
+        <p style="color: var(--text-secondary);">이직률</p>
+      </div>
+    </div>
+
+    <!-- 데이터 분석 차트 -->
+    <div class="grid grid-2" style="margin-bottom: 48px;">
+      <div class="card" style="padding: 32px;">
+        <h3 style="margin-bottom: 24px;"><i class="fas fa-chart-area"></i> 월별 채용 추이</h3>
+        <div style="height: 300px;">
+          <canvas id="recruitChart"></canvas>
+        </div>
+      </div>
+
+      <div class="card" style="padding: 32px;">
+        <h3 style="margin-bottom: 24px;"><i class="fas fa-chart-pie"></i> 부문별 인원 분포</h3>
+        <div style="height: 300px;">
+          <canvas id="departmentChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- HR 대시보드 -->
+    <div class="card" style="padding: 48px; margin-bottom: 48px;">
+      <h2 style="margin-bottom: 32px;"><i class="fas fa-tachometer-alt"></i> HR 대시보드</h2>
+      
+      <div class="grid grid-3" style="margin-bottom: 32px;">
+        <div style="text-align: center; padding: 24px; background: var(--surface-color); border-radius: 12px;">
+          <h4 style="color: var(--text-secondary); margin-bottom: 12px;">평균 재직기간</h4>
+          <h2 style="color: var(--primary-color); margin: 0;">5.8년</h2>
+        </div>
+        <div style="text-align: center; padding: 24px; background: var(--surface-color); border-radius: 12px;">
+          <h4 style="color: var(--text-secondary); margin-bottom: 12px;">교육 이수율</h4>
+          <h2 style="color: var(--success-color); margin: 0;">92%</h2>
+        </div>
+        <div style="text-align: center; padding: 24px; background: var(--surface-color); border-radius: 12px;">
+          <h4 style="color: var(--text-secondary); margin-bottom: 12px;">평균 채용기간</h4>
+          <h2 style="color: var(--info-color); margin: 0;">28일</h2>
+        </div>
+      </div>
+
+      <div style="height: 400px;">
+        <canvas id="performanceChart"></canvas>
+      </div>
+    </div>
+
+    <!-- AI 혁신 기술 -->
+    <div class="card" style="padding: 48px;">
+      <h2 style="margin-bottom: 32px;"><i class="fas fa-lightbulb"></i> AI 혁신 기술</h2>
+      
+      <div class="grid grid-3">
+        <div style="text-align: center; padding: 32px;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <i class="fas fa-robot" style="font-size: 40px; color: var(--primary-color);"></i>
+          </div>
+          <h4 style="margin-bottom: 12px;">AI 채용 스크리닝</h4>
+          <p style="color: var(--text-secondary); font-size: 14px;">
+            머신러닝 기반 지원자 자동 분석 및 매칭
+          </p>
+        </div>
+
+        <div style="text-align: center; padding: 32px;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: #E8F5E9; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <i class="fas fa-brain" style="font-size: 40px; color: var(--success-color);"></i>
+          </div>
+          <h4 style="margin-bottom: 12px;">예측 분석</h4>
+          <p style="color: var(--text-secondary); font-size: 14px;">
+            이직률, 성과 예측 및 인력 수요 분석
+          </p>
+        </div>
+
+        <div style="text-align: center; padding: 32px;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <i class="fas fa-comments" style="font-size: 40px; color: var(--accent-color);"></i>
+          </div>
+          <h4 style="margin-bottom: 12px;">AI 챗봇</h4>
+          <p style="color: var(--text-secondary); font-size: 14px;">
+            24/7 직원 문의 자동 응답 시스템
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>경기도 용인시 수지구 죽전로 152 단국대학교 소프트웨어 ICT관 512호</p>
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script>
+    // 월별 채용 추이
+    const recruitCtx = document.getElementById('recruitChart').getContext('2d');
+    new Chart(recruitCtx, {
+      type: 'line',
+      data: {
+        labels: ['1월', '2월', '3월', '4월', '5월', '6월'],
+        datasets: [{
+          label: '채용 인원',
+          data: [12, 19, 15, 25, 22, 30],
+          borderColor: '#0052A5',
+          backgroundColor: 'rgba(0, 82, 165, 0.1)',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+
+    // 부문별 분포
+    const deptCtx = document.getElementById('departmentChart').getContext('2d');
+    new Chart(deptCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['제조', '반도체', '투자', 'IT', '지주사'],
+        datasets: [{
+          data: [350, 450, 120, 180, 100],
+          backgroundColor: ['#0052A5', '#FF6B35', '#28A745', '#17A2B8', '#FFC107']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+    // 성과 추이
+    const perfCtx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(perfCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+        datasets: [{
+          label: '평균 성과 점수',
+          data: [78, 82, 85, 88],
+          backgroundColor: '#0052A5'
+        }, {
+          label: '목표',
+          data: [80, 80, 85, 85],
+          type: 'line',
+          borderColor: '#FF6B35',
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  </script>
+</body>
+</html>

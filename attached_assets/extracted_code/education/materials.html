@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교육자료실 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📁</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 64px 0; margin-bottom: 48px;">
+    <div class="container">
+      <h1 style="font-size: 40px; margin-bottom: 16px; color: white;">
+        <i class="fas fa-folder-open"></i> 교육자료실
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9);">
+        교육과정 관련 자료를 다운로드하세요 <span style="font-size: 14px; color: rgba(255,255,255,0.7);">(예시)</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 80px;">
+    <!-- 검색 및 필터 -->
+    <div class="card" style="margin-bottom: 32px; padding: 24px;">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <div style="flex: 1; min-width: 250px;">
+          <input type="text" placeholder="자료명 또는 키워드 검색" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+        </div>
+        <select style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <option value="">전체 분야</option>
+          <option value="tech">기술/개발</option>
+          <option value="hr">인사/HR</option>
+          <option value="management">경영/리더십</option>
+          <option value="data">데이터분석</option>
+        </select>
+        <select style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <option value="">모든 파일 형식</option>
+          <option value="pdf">PDF</option>
+          <option value="pptx">PPT</option>
+          <option value="docx">DOC</option>
+          <option value="xlsx">XLS</option>
+        </select>
+        <button class="btn btn-primary">
+          <i class="fas fa-search"></i> 검색
+        </button>
+      </div>
+    </div>
+
+    <!-- 통계 -->
+    <div class="grid grid-4" style="margin-bottom: 48px;">
+      <div class="card text-center" style="padding: 20px;">
+        <h3 style="font-size: 28px; font-weight: 700; color: var(--primary-color); margin-bottom: 8px;">248</h3>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 13px;">전체 자료</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 20px;">
+        <h3 style="font-size: 28px; font-weight: 700; color: var(--accent-color); margin-bottom: 8px;">32</h3>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 13px;">이번 달 신규</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 20px;">
+        <h3 style="font-size: 28px; font-weight: 700; color: var(--success-color); margin-bottom: 8px;">1,542</h3>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 13px;">총 다운로드</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">(예시)</p>
+      </div>
+      <div class="card text-center" style="padding: 20px;">
+        <h3 style="font-size: 28px; font-weight: 700; color: var(--info-color); margin-bottom: 8px;">15</h3>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 13px;">내가 다운로드</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">(예시)</p>
+      </div>
+    </div>
+
+    <!-- 자료 목록 -->
+    <h2 style="margin-bottom: 24px;">최신 자료 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span></h2>
+    
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-file-pdf" style="font-size: 28px; color: white;"></i>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 8px; font-size: 17px;">Python 데이터 분석 - 1주차 강의자료</h3>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+              <span><i class="fas fa-tag"></i> 기술/개발</span>
+              <span><i class="fas fa-calendar"></i> 2026.01.08</span>
+              <span><i class="fas fa-download"></i> 다운로드: 124회</span>
+              <span><i class="fas fa-file"></i> 2.4 MB</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="alert('파일을 다운로드합니다. (예시)')">
+            <i class="fas fa-download"></i> 다운로드
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #FF9F43 0%, #EE9A30 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-file-powerpoint" style="font-size: 28px; color: white;"></i>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 8px; font-size: 17px;">HR Analytics 개요 및 활용사례</h3>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+              <span><i class="fas fa-tag"></i> 인사/HR</span>
+              <span><i class="fas fa-calendar"></i> 2026.01.10</span>
+              <span><i class="fas fa-download"></i> 다운로드: 89회</span>
+              <span><i class="fas fa-file"></i> 5.8 MB</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="alert('파일을 다운로드합니다. (예시)')">
+            <i class="fas fa-download"></i> 다운로드
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #5F27CD 0%, #341F97 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-file-word" style="font-size: 28px; color: white;"></i>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 8px; font-size: 17px;">리더십 역량 자가진단 도구</h3>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+              <span><i class="fas fa-tag"></i> 경영/리더십</span>
+              <span><i class="fas fa-calendar"></i> 2026.01.12</span>
+              <span><i class="fas fa-download"></i> 다운로드: 67회</span>
+              <span><i class="fas fa-file"></i> 850 KB</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="alert('파일을 다운로드합니다. (예시)')">
+            <i class="fas fa-download"></i> 다운로드
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #26DE81 0%, #20BF6B 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-file-excel" style="font-size: 28px; color: white;"></i>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 8px; font-size: 17px;">데이터 분석 실습 - 샘플 데이터셋</h3>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+              <span><i class="fas fa-tag"></i> 데이터분석</span>
+              <span><i class="fas fa-calendar"></i> 2026.01.13</span>
+              <span><i class="fas fa-download"></i> 다운로드: 156회</span>
+              <span><i class="fas fa-file"></i> 1.2 MB</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="alert('파일을 다운로드합니다. (예시)')">
+            <i class="fas fa-download"></i> 다운로드
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #0652DD 0%, #1B1464 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-file-pdf" style="font-size: 28px; color: white;"></i>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 8px; font-size: 17px;">React 컴포넌트 설계 패턴 가이드</h3>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+              <span><i class="fas fa-tag"></i> 기술/개발</span>
+              <span><i class="fas fa-calendar"></i> 2026.01.14</span>
+              <span><i class="fas fa-download"></i> 다운로드: 98회</span>
+              <span><i class="fas fa-file"></i> 3.7 MB</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="alert('파일을 다운로드합니다. (예시)')">
+            <i class="fas fa-download"></i> 다운로드
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-body" style="padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #FC5C65 0%, #EB3B5A 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-file-archive" style="font-size: 28px; color: white;"></i>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 8px; font-size: 17px;">인사평가 시스템 운영 매뉴얼 (통합)</h3>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+              <span><i class="fas fa-tag"></i> 인사/HR</span>
+              <span><i class="fas fa-calendar"></i> 2026.01.15</span>
+              <span><i class="fas fa-download"></i> 다운로드: 203회</span>
+              <span><i class="fas fa-file"></i> 12.5 MB</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="alert('파일을 다운로드합니다. (예시)')">
+            <i class="fas fa-download"></i> 다운로드
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 40px;">
+      <button class="btn btn-outline btn-sm" disabled>
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="btn btn-primary btn-sm">1</button>
+      <button class="btn btn-outline btn-sm">2</button>
+      <button class="btn btn-outline btn-sm">3</button>
+      <button class="btn btn-outline btn-sm">4</button>
+      <button class="btn btn-outline btn-sm">5</button>
+      <button class="btn btn-outline btn-sm">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- 자료 업로드 안내 -->
+    <div class="card" style="margin-top: 48px; padding: 32px; background: linear-gradient(135deg, #F7F9FC 0%, #E8F1F8 100%);">
+      <h3 style="margin-bottom: 16px;"><i class="fas fa-info-circle"></i> 자료 이용 안내</h3>
+      <ul style="color: var(--text-secondary); line-height: 2;">
+        <li>모든 자료는 교육 목적으로만 사용 가능합니다</li>
+        <li>저작권이 있는 자료는 외부 배포가 금지됩니다</li>
+        <li>자료 다운로드 이력은 관리자가 확인할 수 있습니다</li>
+        <li>문제가 있는 자료는 관리자에게 문의해 주세요</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

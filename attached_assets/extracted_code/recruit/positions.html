@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>직무소개 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👔</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 64px 0; margin-bottom: 48px;">
+    <div class="container">
+      <h1 style="font-size: 40px; margin-bottom: 16px; color: white;">
+        <i class="fas fa-briefcase"></i> 직무소개
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9);">
+        JSH에서 함께할 다양한 직무를 소개합니다 <span style="font-size: 14px; color: rgba(255,255,255,0.7);">(예시)</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 80px;">
+    <!-- 직무 카테고리 -->
+    <div class="grid grid-3" style="margin-bottom: 48px;">
+      <div class="card text-center" style="padding: 32px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';" onclick="scrollToSection('it-dev')">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+          <i class="fas fa-code" style="font-size: 36px;"></i>
+        </div>
+        <h3 style="margin-bottom: 8px;">IT 개발</h3>
+        <p style="color: var(--text-secondary); margin: 0;">5개 포지션</p>
+      </div>
+
+      <div class="card text-center" style="padding: 32px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';" onclick="scrollToSection('data')">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+          <i class="fas fa-chart-line" style="font-size: 36px;"></i>
+        </div>
+        <h3 style="margin-bottom: 8px;">데이터 분석</h3>
+        <p style="color: var(--text-secondary); margin: 0;">3개 포지션</p>
+      </div>
+
+      <div class="card text-center" style="padding: 32px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';" onclick="scrollToSection('hr')">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #28a745 0%, #218838 100%); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+          <i class="fas fa-users" style="font-size: 36px;"></i>
+        </div>
+        <h3 style="margin-bottom: 8px;">인사 (HR)</h3>
+        <p style="color: var(--text-secondary); margin: 0;">4개 포지션</p>
+      </div>
+    </div>
+
+    <!-- IT 개발 직무 -->
+    <section id="it-dev" style="margin-bottom: 64px;">
+      <h2 style="margin-bottom: 32px; padding-bottom: 16px; border-bottom: 3px solid var(--primary-color);">
+        <i class="fas fa-code"></i> IT 개발 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span>
+      </h2>
+      
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">백엔드 개발자</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">서버 시스템 설계 및 API 개발</p>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--primary-color);">주요 업무</h4>
+              <ul style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                <li>RESTful API 설계 및 구현</li>
+                <li>데이터베이스 설계 및 최적화</li>
+                <li>서버 성능 모니터링 및 개선</li>
+              </ul>
+            </div>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--primary-color);">필요 역량</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="badge badge-primary">Node.js</span>
+                <span class="badge badge-primary">Python</span>
+                <span class="badge badge-primary">SQL</span>
+                <span class="badge badge-primary">AWS</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="jobs.html" class="btn btn-outline btn-sm">채용공고 보기</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">프론트엔드 개발자</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">사용자 인터페이스 개발</p>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--primary-color);">주요 업무</h4>
+              <ul style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                <li>반응형 웹 애플리케이션 개발</li>
+                <li>UI/UX 디자인 구현</li>
+                <li>웹 성능 최적화</li>
+              </ul>
+            </div>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--primary-color);">필요 역량</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="badge badge-primary">React</span>
+                <span class="badge badge-primary">Vue.js</span>
+                <span class="badge badge-primary">TypeScript</span>
+                <span class="badge badge-primary">CSS</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="jobs.html" class="btn btn-outline btn-sm">채용공고 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 데이터 분석 직무 -->
+    <section id="data" style="margin-bottom: 64px;">
+      <h2 style="margin-bottom: 32px; padding-bottom: 16px; border-bottom: 3px solid var(--accent-color);">
+        <i class="fas fa-chart-line"></i> 데이터 분석 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span>
+      </h2>
+      
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">데이터 사이언티스트</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">데이터 기반 인사이트 도출</p>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--accent-color);">주요 업무</h4>
+              <ul style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                <li>HR 데이터 분석 및 모델링</li>
+                <li>예측 분석 모델 개발</li>
+                <li>데이터 시각화 및 리포팅</li>
+              </ul>
+            </div>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--accent-color);">필요 역량</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="badge badge-accent">Python</span>
+                <span class="badge badge-accent">R</span>
+                <span class="badge badge-accent">SQL</span>
+                <span class="badge badge-accent">머신러닝</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="jobs.html" class="btn btn-outline btn-sm">채용공고 보기</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">데이터 엔지니어</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">데이터 파이프라인 구축</p>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--accent-color);">주요 업무</h4>
+              <ul style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                <li>ETL 파이프라인 설계 및 구축</li>
+                <li>데이터 웨어하우스 관리</li>
+                <li>데이터 품질 관리</li>
+              </ul>
+            </div>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--accent-color);">필요 역량</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="badge badge-accent">Spark</span>
+                <span class="badge badge-accent">Hadoop</span>
+                <span class="badge badge-accent">Kafka</span>
+                <span class="badge badge-accent">Airflow</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="jobs.html" class="btn btn-outline btn-sm">채용공고 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HR 직무 -->
+    <section id="hr" style="margin-bottom: 64px;">
+      <h2 style="margin-bottom: 32px; padding-bottom: 16px; border-bottom: 3px solid var(--success-color);">
+        <i class="fas fa-users"></i> 인사 (HR) <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span>
+      </h2>
+      
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">채용 담당자</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">인재 채용 프로세스 관리</p>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--success-color);">주요 업무</h4>
+              <ul style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                <li>채용 전략 수립 및 실행</li>
+                <li>지원자 스크리닝 및 면접 진행</li>
+                <li>채용 데이터 분석 및 개선</li>
+              </ul>
+            </div>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--success-color);">필요 역량</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="badge badge-success">채용 전문성</span>
+                <span class="badge badge-success">커뮤니케이션</span>
+                <span class="badge badge-success">데이터 분석</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="jobs.html" class="btn btn-outline btn-sm">채용공고 보기</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">HR 매니저</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">인사 정책 및 제도 운영</p>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--success-color);">주요 업무</h4>
+              <ul style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                <li>인사 제도 기획 및 운영</li>
+                <li>성과평가 시스템 관리</li>
+                <li>조직문화 개선 활동</li>
+              </ul>
+            </div>
+            
+            <div style="margin-bottom: 16px;">
+              <h4 style="font-size: 15px; margin-bottom: 8px; color: var(--success-color);">필요 역량</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="badge badge-success">HR 전문성</span>
+                <span class="badge badge-success">리더십</span>
+                <span class="badge badge-success">기획력</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="jobs.html" class="btn btn-outline btn-sm">채용공고 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="text-center">
+      <a href="jobs.html" class="btn btn-primary btn-lg">
+        <i class="fas fa-briefcase"></i> 전체 채용공고 보기
+      </a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</body>
+</html>

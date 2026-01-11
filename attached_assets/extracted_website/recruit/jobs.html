@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채용공고 - 코아시아 HR 포털</title>
+  
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <style>
+    .page-header {
+      background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%);
+      color: white;
+      padding: 48px 0;
+      margin-bottom: 48px;
+    }
+    
+    .search-filter-section {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    
+    .filter-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: end;
+    }
+    
+    .filter-item {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .job-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .job-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 32px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .job-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px);
+    }
+    
+    .job-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+    
+    .job-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .job-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    
+    .job-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    
+    .job-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .job-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .job-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .job-actions {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    
+    .empty-state i {
+      font-size: 64px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    
+    @media (max-width: 767px) {
+      .page-header {
+        padding: 32px 0;
+      }
+      
+      .search-filter-section {
+        padding: 24px 16px;
+      }
+      
+      .filter-group {
+        flex-direction: column;
+      }
+      
+      .filter-item {
+        width: 100%;
+        min-width: unset;
+      }
+      
+      .job-card {
+        padding: 24px 16px;
+      }
+      
+      .job-card-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .job-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .job-footer {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+      }
+      
+      .job-actions {
+        width: 100%;
+      }
+      
+      .job-actions .btn {
+        flex: 1;
+      }
+    }
+  </style>
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <h1 style="font-size: 36px; margin-bottom: 12px; color: white;">
+        <i class="fas fa-briefcase"></i>
+        채용공고
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9); margin: 0;">
+        코아시아 그룹과 함께 성장할 인재를 찾습니다
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container" style="margin-bottom: 80px;">
+    <!-- Search & Filter -->
+    <div class="search-filter-section">
+      <div class="filter-group">
+        <div class="filter-item" style="flex: 2;">
+          <label class="form-label">검색</label>
+          <input 
+            type="text" 
+            class="form-input" 
+            id="search-keyword" 
+            placeholder="직무명, 키워드 검색..."
+            onkeypress="handleSearchKeypress(event)"
+          >
+        </div>
+        
+        <div class="filter-item">
+          <label class="form-label">부문</label>
+          <select class="form-select" id="filter-department" onchange="loadJobs()">
+            <option value="">전체</option>
+            <option value="제조부문">제조부문</option>
+            <option value="반도체부문">반도체부문</option>
+            <option value="투자부문">투자부문</option>
+            <option value="지주사">지주사</option>
+          </select>
+        </div>
+        
+        <div class="filter-item">
+          <label class="form-label">근무지</label>
+          <select class="form-select" id="filter-location" onchange="loadJobs()">
+            <option value="">전체</option>
+            <option value="서울">서울</option>
+            <option value="천안">천안</option>
+            <option value="아산">아산</option>
+            <option value="해외">해외</option>
+          </select>
+        </div>
+        
+        <div class="filter-item">
+          <label class="form-label">고용형태</label>
+          <select class="form-select" id="filter-employment" onchange="loadJobs()">
+            <option value="">전체</option>
+            <option value="정규직">정규직</option>
+            <option value="계약직">계약직</option>
+            <option value="인턴">인턴</option>
+          </select>
+        </div>
+        
+        <div class="filter-item">
+          <label class="form-label">경력</label>
+          <select class="form-select" id="filter-experience" onchange="loadJobs()">
+            <option value="">전체</option>
+            <option value="신입">신입</option>
+            <option value="경력">경력</option>
+            <option value="무관">무관</option>
+          </select>
+        </div>
+        
+        <button class="btn btn-primary" onclick="loadJobs()" style="height: 48px;">
+          <i class="fas fa-search"></i>
+          검색
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Info -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+      <div>
+        <span style="font-size: 18px; font-weight: 600; color: var(--primary-color);" id="result-count">0</span>
+        <span style="color: var(--text-secondary);">개의 채용공고</span>
+      </div>
+      <div>
+        <select class="form-select" id="sort-by" onchange="loadJobs()" style="width: auto;">
+          <option value="-created_at">최신순</option>
+          <option value="deadline">마감임박순</option>
+          <option value="-views">조회수순</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Job List -->
+    <div class="job-list" id="job-list">
+      <!-- Loading -->
+      <div class="card text-center" style="padding: 80px;">
+        <div class="spinner" style="margin: 0 auto 16px;"></div>
+        <p style="color: var(--text-secondary);">채용공고를 불러오는 중...</p>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div id="pagination" style="margin-top: 48px; display: flex; justify-content: center;"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>코아시아 그룹</h4>
+          <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
+            제조·반도체·투자 부문의 선도 기업
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>채용정보</h4>
+          <ul class="footer-links">
+            <li><a href="jobs.html">채용공고</a></li>
+            <li><a href="positions.html">직무소개</a></li>
+            <li><a href="faq.html">채용 FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Copyright © 2026 COASIA. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Tab Bar -->
+  <div class="mobile-tab-bar">
+    <a href="../index.html" class="tab-item">
+      <i class="fas fa-home"></i>
+      <span>홈</span>
+    </a>
+    <a href="jobs.html" class="tab-item active">
+      <i class="fas fa-briefcase"></i>
+      <span>채용</span>
+    </a>
+    <a href="../education/courses.html" class="tab-item">
+      <i class="fas fa-graduation-cap"></i>
+      <span>교육</span>
+    </a>
+    <a href="../mypage/dashboard.html" class="tab-item">
+      <i class="fas fa-user"></i>
+      <span>마이페이지</span>
+    </a>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    let currentPage = 1;
+    const pageSize = 10;
+    
+    // 채용공고 목록 불러오기
+    async function loadJobs(page = 1) {
+      currentPage = page;
+      const jobList = document.getElementById('job-list');
+      
+      // 필터 값 가져오기
+      const keyword = document.getElementById('search-keyword').value.trim();
+      const department = document.getElementById('filter-department').value;
+      const location = document.getElementById('filter-location').value;
+      const employment = document.getElementById('filter-employment').value;
+      const experience = document.getElementById('filter-experience').value;
+      const sortBy = document.getElementById('sort-by').value;
+      
+      // API 쿼리 생성
+      let query = `tables/jobs?status=active&limit=${pageSize}&page=${page}`;
+      
+      if (keyword) query += `&search=${encodeURIComponent(keyword)}`;
+      if (department) query += `&department=${encodeURIComponent(department)}`;
+      if (location) query += `&location=${encodeURIComponent(location)}`;
+      if (employment) query += `&employment_type=${encodeURIComponent(employment)}`;
+      if (experience) query += `&experience=${encodeURIComponent(experience)}`;
+      if (sortBy) query += `&sort=${sortBy}`;
+      
+      try {
+        const response = await fetch(query);
+        const data = await response.json();
+        
+        // 결과 수 업데이트
+        document.getElementById('result-count').textContent = data.total || 0;
+        
+        if (data.data && data.data.length > 0) {
+          // 공고 목록 렌더링
+          jobList.innerHTML = data.data.map(job => {
+            const dday = Utils.getDDay(job.deadline);
+            const ddayClass = dday === '마감' ? 'error' : (parseInt(dday.replace('D-', '')) <= 7 ? 'warning' : 'info');
+            
+            return `
+              <div class="job-card" onclick="location.href='job-detail.html?id=${job.id}'">
+                <div class="job-card-header">
+                  <div class="job-badges">
+                    <span class="badge badge-primary">${job.department || '부문'}</span>
+                    <span class="badge badge-${ddayClass}">${dday}</span>
+                  </div>
+                  <button class="icon-btn" onclick="event.stopPropagation(); toggleBookmark('${job.id}')" title="관심공고">
+                    <i class="far fa-heart"></i>
+                  </button>
+                </div>
+                
+                <h3 class="job-title">${job.title}</h3>
+                
+                <div class="job-meta">
+                  <div class="job-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${job.location || '미정'}</span>
+                  </div>
+                  <div class="job-meta-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>${job.employment_type} · ${job.experience}</span>
+                  </div>
+                  <div class="job-meta-item">
+                    <i class="fas fa-users"></i>
+                    <span>모집인원 ${job.positions || '미정'}</span>
+                  </div>
+                  <div class="job-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>~ ${Utils.formatDate(job.deadline)}</span>
+                  </div>
+                </div>
+                
+                <div class="job-description">
+                  ${Utils.truncate(job.description ? job.description.replace(/<[^>]*>/g, '') : '상세 내용을 확인하세요', 150)}
+                </div>
+                
+                <div class="job-footer">
+                  <div style="color: var(--text-secondary); font-size: 13px;">
+                    <i class="fas fa-eye"></i>
+                    조회 ${job.views || 0}
+                  </div>
+                  <div class="job-actions">
+                    <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); shareJob('${job.id}')">
+                      <i class="fas fa-share-alt"></i>
+                      공유
+                    </button>
+                    <button class="btn btn-primary btn-sm">
+                      <i class="fas fa-file-alt"></i>
+                      지원하기
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+          
+          // 페이지네이션
+          renderPagination(page, Math.ceil(data.total / pageSize));
+        } else {
+          // 빈 상태
+          jobList.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-inbox"></i>
+              <h3 style="margin-bottom: 12px;">검색 결과가 없습니다</h3>
+              <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                검색 조건을 변경하거나 필터를 초기화해보세요
+              </p>
+              <button class="btn btn-primary" onclick="resetFilters()">
+                <i class="fas fa-redo"></i>
+                필터 초기화
+              </button>
+            </div>
+          `;
+          document.getElementById('pagination').innerHTML = '';
+        }
+      } catch (error) {
+        console.error('Failed to load jobs:', error);
+        jobList.innerHTML = `
+          <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>채용공고를 불러오는데 실패했습니다.</span>
+          </div>
+        `;
+      }
+    }
+    
+    // 페이지네이션 렌더링
+    function renderPagination(currentPage, totalPages) {
+      const pagination = document.getElementById('pagination');
+      if (totalPages <= 1) {
+        pagination.innerHTML = '';
+        return;
+      }
+      
+      let html = '<div style="display: flex; gap: 8px;">';
+      
+      // 이전
+      if (currentPage > 1) {
+        html += `<button class="btn btn-outline btn-sm" onclick="loadJobs(${currentPage - 1})">
+          <i class="fas fa-chevron-left"></i>
+        </button>`;
+      }
+      
+      // 페이지 번호
+      const startPage = Math.max(1, currentPage - 2);
+      const endPage = Math.min(totalPages, currentPage + 2);
+      
+      for (let i = startPage; i <= endPage; i++) {
+        html += `<button class="btn ${i === currentPage ? 'btn-primary' : 'btn-outline'} btn-sm" 
+          onclick="loadJobs(${i})">${i}</button>`;
+      }
+      
+      // 다음
+      if (currentPage < totalPages) {
+        html += `<button class="btn btn-outline btn-sm" onclick="loadJobs(${currentPage + 1})">
+          <i class="fas fa-chevron-right"></i>
+        </button>`;
+      }
+      
+      html += '</div>';
+      pagination.innerHTML = html;
+    }
+    
+    // 필터 초기화
+    function resetFilters() {
+      document.getElementById('search-keyword').value = '';
+      document.getElementById('filter-department').value = '';
+      document.getElementById('filter-location').value = '';
+      document.getElementById('filter-employment').value = '';
+      document.getElementById('filter-experience').value = '';
+      document.getElementById('sort-by').value = '-created_at';
+      loadJobs(1);
+    }
+    
+    // 검색 키프레스
+    function handleSearchKeypress(e) {
+      if (e.key === 'Enter') {
+        loadJobs(1);
+      }
+    }
+    
+    // 북마크 토글
+    async function toggleBookmark(jobId) {
+      if (!Auth.isLoggedIn()) {
+        alert('로그인이 필요합니다.');
+        window.location.href = '../login.html';
+        return;
+      }
+      
+      try {
+        const checkResponse = await fetch(`tables/bookmarks?user_id=${Auth.currentUser.id}&job_id=${jobId}`);
+        const checkData = await checkResponse.json();
+        
+        if (checkData.data && checkData.data.length > 0) {
+          await fetch(`tables/bookmarks/${checkData.data[0].id}`, { method: 'DELETE' });
+          Utils.showAlert('관심공고에서 삭제되었습니다.', 'success');
+        } else {
+          await fetch('tables/bookmarks', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              user_id: Auth.currentUser.id,
+              job_id: jobId,
+              created_at: new Date().toISOString()
+            })
+          });
+          Utils.showAlert('관심공고에 추가되었습니다.', 'success');
+        }
+      } catch (error) {
+        console.error('Failed to toggle bookmark:', error);
+        Utils.showAlert('처리 중 오류가 발생했습니다.', 'error');
+      }
+    }
+    
+    // 공유
+    function shareJob(jobId) {
+      const url = `${window.location.origin}/recruit/job-detail.html?id=${jobId}`;
+      if (navigator.share) {
+        navigator.share({
+          title: '코아시아 채용공고',
+          url: url
+        });
+      } else {
+        navigator.clipboard.writeText(url);
+        Utils.showAlert('링크가 복사되었습니다.', 'success');
+      }
+    }
+    
+    // 페이지 로드 시
+    document.addEventListener('DOMContentLoaded', () => {
+      loadJobs(1);
+    });
+  </script>
+</body>
+</html>

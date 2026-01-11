@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채용 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <style>
+    .hero-section {
+      background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%);
+      color: white;
+      padding: 120px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+      background-size: cover;
+      opacity: 0.3;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-title {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+    
+    .hero-subtitle {
+      font-size: 20px;
+      margin-bottom: 40px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-stat-item {
+      text-align: center;
+    }
+    
+    .hero-stat-number {
+      font-size: 40px;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .hero-stat-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: -60px 0 80px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .quick-link-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .quick-link-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.16);
+    }
+    
+    .quick-link-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 32px;
+    }
+    
+    .quick-link-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+    
+    .quick-link-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .benefit-section {
+      background: var(--surface-color);
+      padding: 80px 0;
+    }
+    
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+    
+    .benefit-card {
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    
+    .benefit-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    
+    .benefit-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+    
+    .benefit-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .process-section {
+      padding: 80px 0;
+    }
+    
+    .process-timeline {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+      position: relative;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--border-color);
+      z-index: 0;
+    }
+    
+    .process-step {
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .process-number {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 28px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,82,165,0.3);
+    }
+    
+    .process-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    
+    .process-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 32px;
+      }
+      
+      .hero-stats {
+        gap: 24px;
+      }
+      
+      .quick-links {
+        grid-template-columns: 1fr;
+        margin: -40px 16px 60px;
+      }
+      
+      .process-timeline::before {
+        display: none;
+      }
+      
+      .process-step {
+        flex-basis: 100%;
+      }
+    }
+  </style>
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="container hero-content">
+      <h1 class="hero-title">
+        <i class="fas fa-handshake"></i><br>
+        JSH와 함께 성장할<br>인재를 찾습니다
+      </h1>
+      <p class="hero-subtitle">
+        혁신과 도전정신으로 미래를 만들어가는 JSH에서<br>
+        여러분의 꿈을 실현하세요
+      </p>
+      <a href="jobs.html" class="btn btn-primary btn-lg" style="background: white; color: var(--primary-color); margin-right: 16px;">
+        <i class="fas fa-briefcase"></i> 채용공고 보기
+      </a>
+      <a href="apply.html" class="btn btn-outline btn-lg" style="border-color: white; color: white;">
+        <i class="fas fa-file-alt"></i> 입사지원
+      </a>
+      
+      <div class="hero-stats">
+        <div class="hero-stat-item">
+          <span class="hero-stat-number">1,200+</span>
+          <span class="hero-stat-label">전체 임직원</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-number">5</span>
+          <span class="hero-stat-label">진행중인 채용</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-number">95%</span>
+          <span class="hero-stat-label">AI 채용 정확도</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-number">87%</span>
+          <span class="hero-stat-label">직원 만족도</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Links -->
+  <div class="container">
+    <div class="quick-links">
+      <a href="jobs.html" class="quick-link-card">
+        <div class="quick-link-icon">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <h3 class="quick-link-title">채용공고</h3>
+        <p class="quick-link-desc">현재 모집중인 다양한 포지션을 확인하고 지원하세요</p>
+      </a>
+      
+      <a href="ongoing.html" class="quick-link-card">
+        <div class="quick-link-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3 class="quick-link-title">진행중인 채용</h3>
+        <p class="quick-link-desc">현재 진행중인 채용 프로세스와 현황을 확인하세요</p>
+      </a>
+      
+      <a href="positions.html" class="quick-link-card">
+        <div class="quick-link-icon">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <h3 class="quick-link-title">직무소개</h3>
+        <p class="quick-link-desc">JSH의 다양한 직무와 역할을 자세히 알아보세요</p>
+      </a>
+      
+      <a href="process.html" class="quick-link-card">
+        <div class="quick-link-icon">
+          <i class="fas fa-sitemap"></i>
+        </div>
+        <h3 class="quick-link-title">채용 프로세스</h3>
+        <p class="quick-link-desc">지원부터 입사까지의 단계별 채용 절차를 안내합니다</p>
+      </a>
+      
+      <a href="faq.html" class="quick-link-card">
+        <div class="quick-link-icon">
+          <i class="fas fa-question-circle"></i>
+        </div>
+        <h3 class="quick-link-title">채용 FAQ</h3>
+        <p class="quick-link-desc">자주 묻는 질문과 답변을 확인하세요</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Benefits Section -->
+  <div class="benefit-section">
+    <div class="container">
+      <h2 class="section-title" style="text-align: center;">JSH에서 누리는 혜택</h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 0;">
+        직원의 성장과 행복을 최우선으로 생각합니다
+      </p>
+      
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h3 class="benefit-title">경쟁력 있는 연봉</h3>
+          <p class="benefit-desc">업계 최고 수준의 연봉과 성과급 제도</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🏖️</div>
+          <h3 class="benefit-title">워라밸 보장</h3>
+          <p class="benefit-desc">유연근무제, 재택근무, 연차 자유 사용</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">📚</div>
+          <h3 class="benefit-title">교육 지원</h3>
+          <p class="benefit-desc">직무교육, 어학연수, 학위 취득 지원</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🏥</div>
+          <h3 class="benefit-title">건강관리</h3>
+          <p class="benefit-desc">종합건강검진, 의료비 지원, 피트니스 제공</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🎁</div>
+          <h3 class="benefit-title">복지 포인트</h3>
+          <p class="benefit-desc">연간 200만원 복지 포인트 제공</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🚗</div>
+          <h3 class="benefit-title">통근 지원</h3>
+          <p class="benefit-desc">주차비, 교통비, 셔틀버스 운영</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">👶</div>
+          <h3 class="benefit-title">가족 지원</h3>
+          <p class="benefit-desc">출산휴가, 육아휴직, 자녀 학자금 지원</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🎉</div>
+          <h3 class="benefit-title">리프레시 휴가</h3>
+          <p class="benefit-desc">장기근속자 특별휴가 및 휴가비 지원</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process Section -->
+  <div class="process-section">
+    <div class="container">
+      <h2 class="section-title" style="text-align: center;">채용 프로세스</h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 0;">
+        투명하고 공정한 5단계 채용 절차
+      </p>
+      
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-number">1</div>
+          <h3 class="process-title">입사지원</h3>
+          <p class="process-desc">온라인 지원서 제출</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="process-number">2</div>
+          <h3 class="process-title">서류전형</h3>
+          <p class="process-desc">AI 기반 서류 심사</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="process-number">3</div>
+          <h3 class="process-title">면접전형</h3>
+          <p class="process-desc">1차/2차 실무 면접</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="process-number">4</div>
+          <h3 class="process-title">최종합격</h3>
+          <p class="process-desc">합격자 발표</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="process-number">5</div>
+          <h3 class="process-title">입사</h3>
+          <p class="process-desc">입사 및 온보딩</p>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 48px;">
+        <a href="process.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-arrow-right"></i> 자세한 프로세스 보기
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); padding: 80px 0; text-align: center; color: white;">
+    <div class="container">
+      <h2 style="font-size: 36px; margin-bottom: 24px; color: white;">지금 바로 시작하세요</h2>
+      <p style="font-size: 18px; margin-bottom: 40px; color: rgba(255,255,255,0.9);">
+        JSH와 함께 여러분의 커리어를 발전시킬 기회를 잡으세요
+      </p>
+      <a href="jobs.html" class="btn btn-primary btn-lg" style="background: white; color: var(--primary-color); margin-right: 16px;">
+        <i class="fas fa-search"></i> 채용공고 탐색
+      </a>
+      <a href="../signup.html" class="btn btn-outline btn-lg" style="border-color: white; color: white;">
+        <i class="fas fa-user-plus"></i> 회원가입
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>경기도 용인시 수지구 죽전로 152 단국대학교 소프트웨어 ICT관 512호</p>
+        <p>대표전화: 031-8005-3500 | 이메일: hr@jsh.com</p>
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

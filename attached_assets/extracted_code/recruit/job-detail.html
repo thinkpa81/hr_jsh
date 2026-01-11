@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채용공고 상세 - 코아시아 HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div class="container" style="margin: 48px auto 80px;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <!-- Back Button -->
+      <a href="jobs.html" class="btn btn-outline btn-sm" style="margin-bottom: 24px;">
+        <i class="fas fa-arrow-left"></i> 목록으로
+      </a>
+
+      <!-- Job Detail -->
+      <div class="card" style="padding: 48px;">
+        <div id="job-detail">
+          <div style="text-align: center; padding: 80px 20px;">
+            <div class="spinner" style="margin: 0 auto 16px;"></div>
+            <p style="color: var(--text-secondary);">채용공고를 불러오는 중...</p>
+          </div>
+        </div>
+
+        <!-- Apply Button -->
+        <div style="margin-top: 48px; text-align: center; padding-top: 32px; border-top: 2px solid var(--border-color);">
+          <button class="btn btn-primary btn-lg" onclick="applyJob()" style="width: 100%; max-width: 400px;">
+            <i class="fas fa-file-alt"></i>
+            지원하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    let currentJob = null;
+
+    async function loadJobDetail() {
+      const jobId = Utils.getUrlParam('id');
+      if (!jobId) {
+        window.location.href = 'jobs.html';
+        return;
+      }
+
+      try {
+        const response = await fetch(`tables/jobs/${jobId}`);
+        const job = await response.json();
+        currentJob = job;
+
+        // 조회수 증가
+        await fetch(`tables/jobs/${jobId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ views: (job.views || 0) + 1 })
+        });
+
+        const dday = Utils.getDDay(job.deadline);
+        const ddayClass = dday === '마감' ? 'error' : 'warning';
+
+        document.getElementById('job-detail').innerHTML = `
+          <div style="margin-bottom: 32px;">
+            <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+              <span class="badge badge-primary">${job.department}</span>
+              <span class="badge badge-${ddayClass}">${dday}</span>
+            </div>
+            <h1 style="font-size: 32px; margin-bottom: 16px;">${job.title}</h1>
+            <div style="display: flex; gap: 24px; color: var(--text-secondary); flex-wrap: wrap;">
+              <div><i class="fas fa-map-marker-alt"></i> ${job.location}</div>
+              <div><i class="fas fa-briefcase"></i> ${job.employment_type}</div>
+              <div><i class="fas fa-user-tie"></i> ${job.experience}</div>
+              <div><i class="fas fa-calendar"></i> ~ ${Utils.formatDate(job.deadline)}</div>
+              <div><i class="fas fa-eye"></i> ${job.views || 0}</div>
+            </div>
+          </div>
+
+          <div style="background: var(--surface-color); padding: 24px; border-radius: 12px; margin-bottom: 32px;">
+            <h3 style="margin-bottom: 16px;"><i class="fas fa-info-circle"></i> 모집 정보</h3>
+            <div style="display: grid; gap: 12px;">
+              <div><strong>모집인원:</strong> ${job.positions}</div>
+              <div><strong>급여:</strong> ${job.salary}</div>
+              <div><strong>직무:</strong> ${job.position_name}</div>
+            </div>
+          </div>
+
+          ${job.description ? `<div style="margin-bottom: 32px;"><h3>주요 업무</h3>${job.description}</div>` : ''}
+          ${job.requirements ? `<div style="margin-bottom: 32px;"><h3>자격 요건</h3>${job.requirements}</div>` : ''}
+          ${job.preferences ? `<div style="margin-bottom: 32px;"><h3>우대 사항</h3>${job.preferences}</div>` : ''}
+          ${job.work_conditions ? `<div style="margin-bottom: 32px;"><h3>근무 조건</h3>${job.work_conditions}</div>` : ''}
+          ${job.process ? `<div style="margin-bottom: 32px;"><h3>전형 절차</h3>${job.process}</div>` : ''}
+          ${job.documents ? `<div style="margin-bottom: 32px;"><h3>제출 서류</h3><p>${job.documents}</p></div>` : ''}
+        `;
+      } catch (error) {
+        document.getElementById('job-detail').innerHTML = `
+          <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i>
+            채용공고를 불러오는데 실패했습니다.
+          </div>
+        `;
+      }
+    }
+
+    function applyJob() {
+      if (!Auth.isLoggedIn()) {
+        alert('로그인이 필요합니다.');
+        window.location.href = `../login.html?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+        return;
+      }
+      window.location.href = `apply.html?id=${Utils.getUrlParam('id')}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadJobDetail);
+  </script>
+</body>
+</html>

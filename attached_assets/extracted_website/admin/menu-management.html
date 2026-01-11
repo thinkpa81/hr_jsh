@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메뉴 관리 - JSH HR 포털</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🏢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Include Header -->
+  <div id="header-placeholder"></div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1><i class="fas fa-bars"></i> 메뉴 관리</h1>
+      <p>관리자 권한으로 메뉴를 수정하고 관리하세요</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Authorization Check -->
+      <div class="dashboard-section" style="margin-bottom: 24px; background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border-left: 4px solid #F59E0B;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <i class="fas fa-shield-alt" style="font-size: 24px; color: #D97706;"></i>
+          <div>
+            <h3 style="margin: 0; color: #92400E;">관리자 권한 필요</h3>
+            <p style="margin: 4px 0 0 0; color: #92400E;">이 페이지는 레벨 5 관리자만 접근 가능합니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu Structure -->
+      <div class="dashboard-section">
+        <div class="section-header" style="margin-bottom: 24px;">
+          <h2 class="section-title">
+            <div class="section-icon" style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);">
+              <i class="fas fa-sitemap"></i>
+            </div>
+            메뉴 구조 관리
+          </h2>
+          <button class="btn btn-primary" onclick="addNewMenu()">
+            <i class="fas fa-plus"></i> 새 메뉴 추가
+          </button>
+        </div>
+
+        <div class="menu-tree">
+          
+          <!-- 채용 메뉴 -->
+          <div class="menu-category">
+            <div class="menu-category-header">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <i class="fas fa-users-cog" style="color: var(--primary-color); font-size: 20px;"></i>
+                <h3 style="margin: 0;">채용</h3>
+              </div>
+              <div class="action-buttons">
+                <button class="btn-icon" title="수정" onclick="editMenu('recruit')">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
+            <div class="menu-items">
+              <div class="menu-item" data-menu-id="recruit-dashboard">
+                <div class="menu-item-content">
+                  <i class="fas fa-globe"></i>
+                  <span class="menu-item-text editable" contenteditable="false">채용 대시보드</span>
+                  <span class="menu-item-path">/recruit/dashboard.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-dashboard')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="menu-item" data-menu-id="recruit-jobs">
+                <div class="menu-item-content">
+                  <i class="fas fa-briefcase"></i>
+                  <span class="menu-item-text editable" contenteditable="false">채용공고</span>
+                  <span class="menu-item-path">/recruit/jobs.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-jobs')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="recruit-ongoing">
+                <div class="menu-item-content">
+                  <i class="fas fa-clock"></i>
+                  <span class="menu-item-text editable" contenteditable="false">진행중인 채용</span>
+                  <span class="menu-item-path">/recruit/ongoing.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-ongoing')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="recruit-positions">
+                <div class="menu-item-content">
+                  <i class="fas fa-user-tie"></i>
+                  <span class="menu-item-text editable" contenteditable="false">직무소개</span>
+                  <span class="menu-item-path">/recruit/positions.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-positions')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="recruit-process">
+                <div class="menu-item-content">
+                  <i class="fas fa-sitemap"></i>
+                  <span class="menu-item-text editable" contenteditable="false">채용 프로세스</span>
+                  <span class="menu-item-path">/recruit/process.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-process')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="recruit-faq">
+                <div class="menu-item-content">
+                  <i class="fas fa-question-circle"></i>
+                  <span class="menu-item-text editable" contenteditable="false">채용 FAQ</span>
+                  <span class="menu-item-path">/recruit/faq.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-faq')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="recruit-resume-upload">
+                <div class="menu-item-content">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <span class="menu-item-text editable" contenteditable="false">이력서 업로드</span>
+                  <span class="menu-item-path">/recruit/resume-upload.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-resume-upload')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="recruit-applicant-management">
+                <div class="menu-item-content">
+                  <i class="fas fa-users-cog"></i>
+                  <span class="menu-item-text editable" contenteditable="false">지원자 관리</span>
+                  <span class="menu-item-path">/recruit/applicant-management.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-applicant-management')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="recruit-email-management">
+                <div class="menu-item-content">
+                  <i class="fas fa-envelope-open-text"></i>
+                  <span class="menu-item-text editable" contenteditable="false">이메일 관리</span>
+                  <span class="menu-item-path">/recruit/email-management.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-email-management')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="recruit-analytics">
+                <div class="menu-item-content">
+                  <i class="fas fa-chart-line"></i>
+                  <span class="menu-item-text editable" contenteditable="false">통계 분석</span>
+                  <span class="menu-item-path">/recruit/analytics.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('recruit-analytics')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HR 시스템 메뉴 -->
+          <div class="menu-category">
+            <div class="menu-category-header">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <i class="fas fa-chart-bar" style="color: var(--primary-color); font-size: 20px;"></i>
+                <h3 style="margin: 0;">HR 시스템</h3>
+              </div>
+              <div class="action-buttons">
+                <button class="btn-icon" title="수정" onclick="editMenu('hr-system')">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
+            <div class="menu-items">
+              <div class="menu-item" data-menu-id="hr-analytics">
+                <div class="menu-item-content">
+                  <i class="fas fa-chart-bar"></i>
+                  <span class="menu-item-text editable" contenteditable="false">데이터 분석</span>
+                  <span class="menu-item-path">/analytics/dashboard.html</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('hr-analytics')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="hr-dashboard">
+                <div class="menu-item-content">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <span class="menu-item-text editable" contenteditable="false">HR 대시보드</span>
+                  <span class="menu-item-path">/analytics/dashboard.html#hr-dashboard</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('hr-dashboard')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="menu-item" data-menu-id="ai-stats">
+                <div class="menu-item-content">
+                  <i class="fas fa-robot"></i>
+                  <span class="menu-item-text editable" contenteditable="false">AI HR 통계</span>
+                  <span class="menu-item-path">/analytics/dashboard.html#ai-stats</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="수정" onclick="toggleEdit(this)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon" title="삭제" onclick="deleteMenuItem('ai-stats')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Save Button -->
+        <div style="margin-top: 32px; text-align: center;">
+          <button class="btn btn-primary btn-lg" onclick="saveMenuChanges()">
+            <i class="fas fa-save"></i> 변경사항 저장
+          </button>
+          <button class="btn btn-outline btn-lg" style="margin-left: 12px;" onclick="location.reload()">
+            <i class="fas fa-undo"></i> 취소
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 JSH HR Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Load header
+    fetch('../includes/header.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+      });
+
+    // Check admin authorization (Level 5)
+    // In a real application, this would check session/token
+    function checkAdminAuth() {
+      // Simulated auth check
+      const adminLevel = parseInt(sessionStorage.getItem('adminLevel') || '0');
+      if (adminLevel < 5) {
+        alert('관리자 권한이 필요합니다. (레벨 5 이상)');
+        window.location.href = '../index.html';
+        return false;
+      }
+      return true;
+    }
+
+    // Toggle edit mode for menu item
+    function toggleEdit(button) {
+      const menuItem = button.closest('.menu-item');
+      const textElement = menuItem.querySelector('.menu-item-text');
+      const isEditing = textElement.getAttribute('contenteditable') === 'true';
+      
+      if (isEditing) {
+        // Save mode
+        textElement.setAttribute('contenteditable', 'false');
+        textElement.style.background = 'transparent';
+        textElement.style.padding = '0';
+        button.innerHTML = '<i class="fas fa-edit"></i>';
+        button.title = '수정';
+        
+        // Show success message
+        showToast('메뉴 텍스트가 수정되었습니다.', 'success');
+      } else {
+        // Edit mode
+        textElement.setAttribute('contenteditable', 'true');
+        textElement.style.background = '#FEF3C7';
+        textElement.style.padding = '4px 8px';
+        textElement.style.borderRadius = '4px';
+        textElement.focus();
+        button.innerHTML = '<i class="fas fa-save"></i>';
+        button.title = '저장';
+      }
+    }
+
+    // Delete menu item
+    function deleteMenuItem(menuId) {
+      if (!confirm('이 메뉴 항목을 삭제하시겠습니까?')) {
+        return;
+      }
+
+      const menuItem = document.querySelector(`[data-menu-id="${menuId}"]`);
+      if (menuItem) {
+        menuItem.style.transition = 'all 0.3s ease';
+        menuItem.style.opacity = '0';
+        menuItem.style.transform = 'translateX(-20px)';
+        
+        setTimeout(() => {
+          menuItem.remove();
+          showToast('메뉴 항목이 삭제되었습니다.', 'success');
+        }, 300);
+      }
+    }
+
+    // Edit menu category
+    function editMenu(categoryId) {
+      const categoryName = prompt('카테고리 이름을 입력하세요:');
+      if (categoryName) {
+        showToast(`"${categoryName}" 카테고리가 수정되었습니다.`, 'success');
+      }
+    }
+
+    // Add new menu
+    function addNewMenu() {
+      const menuName = prompt('새 메뉴 이름을 입력하세요:');
+      if (!menuName) return;
+
+      const menuPath = prompt('메뉴 경로를 입력하세요: (예: /page/example.html)');
+      if (!menuPath) return;
+
+      showToast(`"${menuName}" 메뉴가 추가되었습니다.`, 'success');
+    }
+
+    // Save menu changes
+    function saveMenuChanges() {
+      // Collect all menu data
+      const menus = [];
+      document.querySelectorAll('.menu-item').forEach(item => {
+        const id = item.getAttribute('data-menu-id');
+        const text = item.querySelector('.menu-item-text').textContent;
+        const path = item.querySelector('.menu-item-path').textContent;
+        menus.push({ id, text, path });
+      });
+
+      console.log('Saving menu changes:', menus);
+      
+      // In a real application, this would save to database
+      showToast('모든 변경사항이 저장되었습니다!', 'success');
+      
+      // Reload after 1 second
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    }
+
+    // Toast notification
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10B981' : '#3B82F6'};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+      `;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Initialize
+    // checkAdminAuth(); // Uncomment in production
+  </script>
+
+  <style>
+    .menu-tree {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .menu-category {
+      background: white;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .menu-category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid #F3F4F6;
+      transition: all 0.2s ease;
+    }
+
+    .menu-item:hover {
+      background: #F9FAFB;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .menu-item-content i {
+      color: var(--primary-color);
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .menu-item-text {
+      font-weight: 500;
+      color: var(--text-primary);
+      min-width: 150px;
+    }
+
+    .menu-item-path {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-family: 'Courier New', monospace;
+      background: #F3F4F6;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  </style>
+
+</body>
+</html>

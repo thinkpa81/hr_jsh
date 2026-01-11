@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 - JSH HR 포털</title>
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📢</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/header-loader.js"></script>
+</head>
+<body>
+  <!-- Header will be loaded automatically by header-loader.js -->
+
+  <div style="background: linear-gradient(135deg, #0052A5 0%, #003D7A 100%); color: white; padding: 64px 0; margin-bottom: 48px;">
+    <div class="container">
+      <h1 style="font-size: 40px; margin-bottom: 16px; color: white;">
+        <i class="fas fa-bullhorn"></i> 공지사항
+      </h1>
+      <p style="font-size: 18px; color: rgba(255,255,255,0.9);">
+        JSH HR 포털의 주요 소식과 공지를 확인하세요 <span style="font-size: 14px; color: rgba(255,255,255,0.7);">(예시)</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 80px;">
+    <!-- 검색 -->
+    <div class="card" style="margin-bottom: 32px; padding: 24px;">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <div style="flex: 1; min-width: 250px;">
+          <input type="text" placeholder="제목 또는 내용으로 검색" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+        </div>
+        <select style="padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px;">
+          <option value="">전체 분류</option>
+          <option value="system">시스템</option>
+          <option value="recruit">채용</option>
+          <option value="education">교육</option>
+          <option value="hr">인사/HR</option>
+          <option value="etc">기타</option>
+        </select>
+        <button class="btn btn-primary">
+          <i class="fas fa-search"></i> 검색
+        </button>
+      </div>
+    </div>
+
+    <!-- 중요 공지 -->
+    <div style="margin-bottom: 32px;">
+      <h3 style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-star" style="color: #FFD700;"></i>
+        중요 공지
+      </h3>
+      
+      <div class="card" style="margin-bottom: 12px; background: linear-gradient(135deg, #FFF4E6 0%, #FFE8CC 100%); border-left: 4px solid var(--accent-color);">
+        <div class="card-body" style="padding: 24px; cursor: pointer;" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+            <div>
+              <span class="badge badge-accent" style="margin-right: 8px;">시스템</span>
+              <span class="badge" style="background: #FFD700; color: #333;">중요</span>
+            </div>
+            <span style="color: var(--text-secondary); font-size: 13px;">2026.01.15</span>
+          </div>
+          <h3 style="margin-bottom: 12px; font-size: 18px; cursor: pointer;">[필독] 2026년 상반기 시스템 업그레이드 안내</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; margin: 0; line-height: 1.6;">
+            2026년 2월 1일(토) 00:00 ~ 06:00 시스템 업그레이드가 진행됩니다. 해당 시간 동안 일시적으로 서비스 이용이 제한될 수 있습니다.
+          </p>
+          <div style="margin-top: 12px; display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary);">
+            <span><i class="fas fa-eye"></i> 조회 548</span>
+            <span><i class="fas fa-user"></i> 관리자</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 일반 공지 -->
+    <h3 style="margin-bottom: 16px;">전체 공지사항 <span style="color: var(--text-secondary); font-size: 14px; font-weight: normal;">(예시)</span></h3>
+    
+    <div class="card" style="overflow: hidden;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead style="background: var(--surface-color);">
+          <tr>
+            <th style="padding: 16px; text-align: left; border-bottom: 2px solid var(--border-color); width: 100px;">분류</th>
+            <th style="padding: 16px; text-align: left; border-bottom: 2px solid var(--border-color);">제목</th>
+            <th style="padding: 16px; text-align: center; border-bottom: 2px solid var(--border-color); width: 100px;">작성자</th>
+            <th style="padding: 16px; text-align: center; border-bottom: 2px solid var(--border-color); width: 120px;">등록일</th>
+            <th style="padding: 16px; text-align: center; border-bottom: 2px solid var(--border-color); width: 80px;">조회</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-primary">채용</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">2026년 상반기 공개채용 일정 안내</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">2026년 상반기 공개채용 일정이 확정되었습니다.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">채용팀</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2026.01.12</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">324</td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-success">교육</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">신규 교육과정 개설 안내 (Python, React)</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">2월부터 신규 교육과정이 개설됩니다.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">교육팀</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2026.01.10</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">287</td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-info">인사/HR</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">2025년 하반기 인사평가 결과 공지</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">평가 결과가 개인별로 통보되었습니다.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">인사팀</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2026.01.08</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">512</td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-secondary">기타</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">설 연휴 기간 고객센터 운영 안내</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">설 연휴 기간 고객센터 운영 시간이 조정됩니다.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">관리자</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2026.01.05</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">198</td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-primary">채용</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">채용 프로세스 개선 사항 안내</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">AI 면접 시스템이 도입되었습니다.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">채용팀</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2026.01.03</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">421</td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-success">교육</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">2025년 4분기 우수 학습자 선정 결과</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">우수 학습자에게 소정의 상품이 지급됩니다.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">교육팀</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2025.12.28</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">356</td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-warning">시스템</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">개인정보처리방침 개정 안내</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">2026년 1월 1일부터 개정된 방침이 적용됩니다.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">관리자</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2025.12.20</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">625</td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-info">인사/HR</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">복리후생 제도 개선 안내</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">재택근무 및 유연근무제 확대 시행</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">인사팀</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2025.12.15</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">743</td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid var(--border-color); cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-primary">채용</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">경력직 채용 상시 모집 안내</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">주요 직무에 대한 경력직 채용을 상시 진행합니다.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">채용팀</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2025.12.10</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">892</td>
+          </tr>
+
+          <tr style="cursor: pointer;" onmouseover="this.style.background='var(--surface-color)'" onmouseout="this.style.background='white'" onclick="alert('공지사항 상세 내용을 표시합니다. (예시)')">
+            <td style="padding: 16px;">
+              <span class="badge badge-success">교육</span>
+            </td>
+            <td style="padding: 16px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">2026년 연간 교육 계획 수립 완료</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">내년도 교육 일정을 확인하세요.</div>
+            </td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">교육팀</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">2025.12.05</td>
+            <td style="padding: 16px; text-align: center; color: var(--text-secondary);">567</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 32px;">
+      <button class="btn btn-outline btn-sm" disabled>
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="btn btn-primary btn-sm">1</button>
+      <button class="btn btn-outline btn-sm">2</button>
+      <button class="btn btn-outline btn-sm">3</button>
+      <button class="btn btn-outline btn-sm">4</button>
+      <button class="btn btn-outline btn-sm">5</button>
+      <button class="btn btn-outline btn-sm">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>Copyright © 2026 Jang Soonho. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
